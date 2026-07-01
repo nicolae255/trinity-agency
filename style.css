@@ -1,4 +1,4 @@
-/* ===== Trinity Agency — Design System (dark premium, gradient accents) ===== */
+/* ===== Found — Design System (dark premium, gradient accents) ===== */
 
 :root {
   --bg: #0a0c0a;
@@ -591,8 +591,7 @@ footer {
   }
 }
 
-.cursor-dot,
-.cursor-ring {
+.cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
@@ -601,31 +600,13 @@ footer {
   z-index: 10000;
   transform: translate(-50%, -50%);
   opacity: 0;
-}
-
-body.cursor-ready .cursor-dot,
-body.cursor-ready .cursor-ring {
-  opacity: 1;
-}
-
-.cursor-dot {
   width: 6px;
   height: 6px;
   background: var(--lime);
 }
 
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  transition: width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.25s var(--ease),
-    left 0.12s ease-out, top 0.12s ease-out;
-}
-
-.cursor-ring.is-active {
-  width: 56px;
-  height: 56px;
-  border-color: var(--lime);
+body.cursor-ready .cursor-dot {
+  opacity: 1;
 }
 
 /* ===== Scroll reveal ===== */
@@ -2029,8 +2010,7 @@ body.cursor-ready .cursor-ring {
     transform: scaleY(1);
   }
 
-  .cursor-dot,
-  .cursor-ring {
+  .cursor-dot {
     display: none;
   }
 

@@ -2,21 +2,13 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 // Custom cursor
 const cursorDot = document.querySelector(".cursor-dot");
-const cursorRing = document.querySelector(".cursor-ring");
 
-if (cursorDot && cursorRing && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+if (cursorDot && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
   document.body.classList.add("cursor-ready");
 
   window.addEventListener("mousemove", (e) => {
     cursorDot.style.left = e.clientX + "px";
     cursorDot.style.top = e.clientY + "px";
-    cursorRing.style.left = e.clientX + "px";
-    cursorRing.style.top = e.clientY + "px";
-  });
-
-  document.querySelectorAll("a, button, .service-card").forEach((el) => {
-    el.addEventListener("mouseenter", () => cursorRing.classList.add("is-active"));
-    el.addEventListener("mouseleave", () => cursorRing.classList.remove("is-active"));
   });
 }
 
