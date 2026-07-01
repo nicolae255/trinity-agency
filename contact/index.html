@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Trinity Agency</title>
+<meta name="description" content="Tell Trinity Agency about your business and your growth goals — organic, promotional, or prospecting. We reply within 24 hours.">
+<link rel="canonical" href="https://nicolae255.github.io/trinity-agency/contact/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact Us | Trinity Agency">
+<meta property="og:description" content="Tell us where you're stuck — organic, paid, or pipeline — and we'll tell you exactly how we'd fix it.">
+<meta property="og:url" content="https://nicolae255.github.io/trinity-agency/contact/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a href="../" class="logo">Trinity<span>.</span></a>
+  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+  <nav>
+    <ul>
+      <li><a href="../#offers">Services</a></li>
+      <li><a href="../#process">How We Work</a></li>
+      <li><a href="../contact/">Contact</a></li>
+      <li><a href="../contact/" class="btn btn-primary" style="padding: 0.6rem 1.4rem;">Let's Talk</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="breadcrumb reveal"><a href="../">Home</a> / Contact</p>
+      <p class="eyebrow reveal">Let's Work Together</p>
+      <h1 class="reveal">Tell us where you're stuck.</h1>
+      <p class="lead reveal">Organic, paid, or pipeline — fill in the form and we'll tell you exactly how we'd approach it. No obligation, no generic pitch deck.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container contact-layout">
+
+      <form class="form-card glass reveal" id="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company">
+        </div>
+        <div class="form-group">
+          <label for="interest">What are you interested in?</label>
+          <select id="interest" name="interest">
+            <option value="Organic Boost">Organic Boost</option>
+            <option value="Promotional Marketing">Promotional Marketing</option>
+            <option value="Find Prospects">Find Prospects</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us a bit about your business and goals..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Send message</button>
+      </form>
+
+      <div class="reveal">
+        <div class="section-header left" style="margin-bottom: 1.5rem;">
+          <p class="eyebrow">Get in touch</p>
+          <h2>We reply within 24 hours</h2>
+          <p>Prefer email? Reach out directly and we'll get back to you the same business day.</p>
+        </div>
+
+        <div class="contact-info-list">
+          <div class="contact-info-item glass">
+            <div class="contact-info-icon">✉️</div>
+            <div>
+              <strong>Email</strong>
+              <p style="margin: 0;">hello@trinity-agency.com</p>
+            </div>
+          </div>
+          <div class="contact-info-item glass">
+            <div class="contact-info-icon">⏱️</div>
+            <div>
+              <strong>Response time</strong>
+              <p style="margin: 0;">Under 24 hours, every time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../" class="logo">Trinity<span>.</span></a>
+        <p>A marketing agency built around three things that actually move the needle: organic growth, promotion, and prospecting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="../organic-boost/">Organic Boost</a></li>
+            <li><a href="../promotional-marketing/">Promotional Marketing</a></li>
+            <li><a href="../find-prospects/">Find Prospects</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../#process">How We Work</a></li>
+            <li><a href="../contact/">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Trinity Agency. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  const form = document.getElementById("contact-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const subject = encodeURIComponent("New inquiry: " + (data.get("interest") || "General"));
+      const body = encodeURIComponent(
+        "Name: " + data.get("name") +
+        "\nEmail: " + data.get("email") +
+        "\nCompany: " + data.get("company") +
+        "\nInterested in: " + data.get("interest") +
+        "\n\nMessage:\n" + data.get("message")
+      );
+      window.location.href = "mailto:hello@trinity-agency.com?subject=" + subject + "&body=" + body;
+    });
+  }
+</script>
+</body>
+</html>
