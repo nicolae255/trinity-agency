@@ -901,6 +901,30 @@ body.cursor-ready .cursor-ring {
   transition: color 0.3s var(--ease);
 }
 
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-left: 0.4rem;
+  border-left: 1px solid var(--border);
+}
+
+.lang-switcher a {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--faint);
+  transition: color 0.3s var(--ease);
+}
+
+.lang-switcher a:hover {
+  color: var(--text);
+}
+
+.lang-switcher a.is-active {
+  color: var(--lime);
+}
+
 .story-nav nav a:not(.btn):hover {
   color: var(--text);
 }
@@ -1723,6 +1747,11 @@ body.cursor-ready .cursor-ring {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;
+  }
+
+  .lang-switcher {
+    padding-left: 0;
+    border-left: none;
   }
 
   .nav-dropdown-menu {
