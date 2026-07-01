@@ -1042,7 +1042,7 @@ body.cursor-ready .cursor-ring {
   font-size: 0.85rem;
   color: var(--faint);
   letter-spacing: 0.1em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .story-headline {
@@ -1051,21 +1051,22 @@ body.cursor-ready .cursor-ring {
   letter-spacing: -0.03em;
   line-height: 1.05;
   font-size: clamp(2.2rem, 6vw, 4.4rem);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .story-sub {
   font-size: 1.15rem;
   color: var(--muted);
   max-width: 620px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .story-list {
   font-size: 0.92rem;
   color: var(--faint);
   letter-spacing: 0.01em;
-  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .story-list span {
@@ -1221,7 +1222,6 @@ body.cursor-ready .cursor-ring {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-top: 3rem;
 }
 
 .blog-card {
@@ -1241,6 +1241,20 @@ body.cursor-ready .cursor-ring {
 .blog-thumb {
   height: 170px;
   background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(214, 255, 74, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.blog-thumb span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .blog-card-body {
@@ -1372,6 +1386,44 @@ body.cursor-ready .cursor-ring {
   object-fit: cover;
   object-position: top;
   display: block;
+}
+
+.proof-thumb-logo {
+  height: 170px;
+  background: #060606;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem;
+  position: relative;
+}
+
+.proof-thumb-logo img {
+  max-width: 65%;
+  max-height: 65%;
+  object-fit: contain;
+}
+
+.proof-thumb {
+  position: relative;
+}
+
+.proof-platform-badge {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 1;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .proof-card {
