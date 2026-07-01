@@ -229,7 +229,9 @@ p {
   overflow: hidden;
   padding-top: 9rem;
   padding-bottom: 7rem;
-  background: var(--green-deep);
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.09) 1.5px, transparent 1.5px) 0 0/26px 26px,
+    var(--green-deep);
   color: #fff;
 }
 
@@ -353,6 +355,30 @@ p {
   }
 }
 
+/* ===== Stamp badge ===== */
+.stamp-badge {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  z-index: 2;
+  background: var(--lime);
+  color: var(--green-deep);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transform: rotate(-6deg);
+  transition: transform 0.4s var(--ease);
+}
+
+.stamp-badge:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
 /* ===== Marquee ticker ===== */
 .marquee {
   background: var(--lime);
@@ -429,11 +455,11 @@ p {
   z-index: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(4.5rem, 13vw, 10.5rem);
+  font-size: clamp(5rem, 15vw, 12rem);
   line-height: 1;
   letter-spacing: -0.04em;
-  color: var(--ink);
-  opacity: 0.08;
+  color: var(--green);
+  opacity: 0.16;
   white-space: nowrap;
   pointer-events: none;
   transition: opacity 0.5s var(--ease), color 0.5s var(--ease), transform 0.5s var(--ease);
@@ -456,8 +482,8 @@ p {
 }
 
 .offer-icon {
-  width: 52px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   border-radius: var(--radius-md);
   background: var(--green-tint);
   color: var(--green);
@@ -465,18 +491,19 @@ p {
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
 .service-row:hover .offer-icon {
-  background: var(--green);
-  color: #fff;
+  background: var(--lime);
+  color: var(--green-deep);
+  transform: rotate(-8deg) scale(1.05);
 }
 
 .offer-icon svg,
 .contact-info-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .service-row-content h3 {
@@ -572,7 +599,9 @@ p {
   padding: 4.5rem 3rem;
   position: relative;
   overflow: hidden;
-  background: var(--green) !important;
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.09) 1.5px, transparent 1.5px) 0 0/26px 26px,
+    var(--green) !important;
   border: none !important;
 }
 
@@ -763,7 +792,9 @@ footer {
   overflow: hidden;
   padding-top: 8.5rem;
   padding-bottom: 4.5rem;
-  background: var(--green-deep);
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.09) 1.5px, transparent 1.5px) 0 0/26px 26px,
+    var(--green-deep);
   color: #fff;
 }
 
@@ -1035,5 +1066,12 @@ footer {
 @media (max-width: 700px) {
   .spin-badge {
     display: none;
+  }
+
+  .stamp-badge {
+    left: 1.25rem;
+    bottom: 1.25rem;
+    font-size: 0.72rem;
+    padding: 0.5rem 0.9rem;
   }
 }
