@@ -167,11 +167,9 @@ if (pageTransition && !prefersReducedMotion) {
   });
 }
 
-// Chat widget
-// TODO: replace with your real Formspree endpoint (formspree.io -> new form ->
-// set the destination to nicolascojocari@yahoo.fr -> copy the form's endpoint URL).
-// Until this is set, submissions will fail with a visible error in the widget.
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
+// Chat widget — submits via Web3Forms (access key lives in each page's
+// hidden "access_key" field, delivers to nicolascojocari@yahoo.fr).
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const chatWidget = document.getElementById("chatWidget");
 
@@ -221,13 +219,14 @@ if (chatWidget) {
     submitBtn.textContent = "Sending...";
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: new FormData(chatForm),
       });
 
-      if (!res.ok) throw new Error("Request failed");
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error("Request failed");
 
       steps[2].hidden = true;
       steps.done.hidden = false;
