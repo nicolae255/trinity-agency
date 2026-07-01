@@ -1361,20 +1361,27 @@ body.cursor-ready .cursor-ring {
 }
 
 .proof-thumb {
-  height: 140px;
+  height: 170px;
   background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(214, 255, 74, 0.15));
   position: relative;
 }
 
-.proof-thumb::after {
-  content: "Placeholder";
-  position: absolute;
-  bottom: 0.6rem;
-  right: 0.8rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+.proof-thumb-img {
+  height: 170px;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.proof-card {
+  display: block;
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.proof-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
 }
 
 .proof-body {
