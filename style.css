@@ -1069,6 +1069,10 @@ body.cursor-ready .cursor-ring {
   margin-bottom: 2rem;
 }
 
+.story-inner .offer-link {
+  margin-top: 1rem;
+}
+
 .story-list span {
   color: var(--muted);
 }
