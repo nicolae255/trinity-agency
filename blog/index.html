@@ -59,9 +59,16 @@
 
   <section style="padding-top: 0;">
     <div class="container">
-      <div class="blog-grid">
+      <div class="blog-filters" id="blogFilters">
+        <button type="button" class="blog-filter is-active" data-filter="all">All</button>
+        <button type="button" class="blog-filter" data-filter="organic">Organic</button>
+        <button type="button" class="blog-filter" data-filter="strategy">Strategy</button>
+        <button type="button" class="blog-filter" data-filter="prospecting">Prospecting</button>
+      </div>
 
-        <a href="seo-fundamentals-2026/" class="blog-card reveal">
+      <div class="blog-grid" id="blogGrid">
+
+        <a href="seo-fundamentals-2026/" class="blog-card reveal" data-category="organic">
           <div class="blog-thumb"><span>SEO That Actually Ranks</span></div>
           <div class="blog-card-body">
             <span class="blog-tag">Organic</span>
@@ -71,7 +78,7 @@
           </div>
         </a>
 
-        <a href="organic-vs-paid/" class="blog-card reveal">
+        <a href="organic-vs-paid/" class="blog-card reveal" data-category="strategy">
           <div class="blog-thumb"><span>Organic vs Paid</span></div>
           <div class="blog-card-body">
             <span class="blog-tag">Strategy</span>
@@ -81,7 +88,7 @@
           </div>
         </a>
 
-        <a href="b2b-prospecting-mistakes/" class="blog-card reveal">
+        <a href="b2b-prospecting-mistakes/" class="blog-card reveal" data-category="prospecting">
           <div class="blog-thumb"><span>Fix Your Prospecting</span></div>
           <div class="blog-card-body">
             <span class="blog-tag">Prospecting</span>
@@ -91,6 +98,23 @@
           </div>
         </a>
 
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="newsletter-band glass reveal">
+        <h2>Get our marketing emails</h2>
+        <p>New posts, no fluff, straight to your inbox. Unsubscribe anytime.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+          <input type="hidden" name="subject" value="New newsletter signup from trinity-agency.com/blog">
+          <input type="hidden" name="from_name" value="Trinity Agency Blog">
+          <input type="email" name="email" placeholder="you@company.com" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="newsletter-note" id="newsletterNote"></p>
       </div>
     </div>
   </section>
@@ -185,6 +209,50 @@
   </button>
 </div>
 <script src="../script.js"></script>
+<script>
+  const blogFilters = document.getElementById("blogFilters");
+  if (blogFilters) {
+    const cards = document.querySelectorAll("#blogGrid .blog-card");
+    blogFilters.addEventListener("click", (e) => {
+      const btn = e.target.closest(".blog-filter");
+      if (!btn) return;
+      blogFilters.querySelectorAll(".blog-filter").forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      const filter = btn.dataset.filter;
+      cards.forEach((card) => {
+        const show = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("is-hidden", !show);
+      });
+    });
+  }
+
+  const newsletterForm = document.getElementById("newsletterForm");
+  if (newsletterForm) {
+    const note = document.getElementById("newsletterNote");
+    newsletterForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = newsletterForm.querySelector("button");
+      btn.disabled = true;
+      btn.textContent = "Subscribing...";
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(newsletterForm),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error("Request failed");
+        newsletterForm.reset();
+        note.textContent = "You're on the list — thanks for subscribing.";
+      } catch (err) {
+        note.textContent = "Something went wrong. Please try again.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Subscribe";
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
