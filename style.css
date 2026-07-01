@@ -13,6 +13,9 @@
   --green-soft: #dfe8de;
   --green-tint: #eef2ea;
 
+  --lime: #d6ff4a;
+  --lime-deep: #a8d621;
+
   --radius-sm: 10px;
   --radius-md: 18px;
   --radius-lg: 24px;
@@ -276,7 +279,7 @@ p {
 }
 
 .hero h1 .highlight {
-  color: var(--green-soft);
+  color: var(--lime);
 }
 
 .hero p.lead {
@@ -309,6 +312,93 @@ p {
 
 .hero .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Spinning badge ===== */
+.spin-badge {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  z-index: 2;
+  width: 108px;
+  height: 108px;
+}
+
+.spin-badge svg {
+  width: 100%;
+  height: 100%;
+  animation: spinBadge 14s linear infinite;
+}
+
+.spin-badge text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  fill: var(--lime);
+  letter-spacing: 1.5px;
+}
+
+.spin-badge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+@keyframes spinBadge {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Marquee ticker ===== */
+.marquee {
+  background: var(--lime);
+  overflow: hidden;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(20, 20, 15, 0.08);
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: max-content;
+  animation: marqueeScroll 26s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-shrink: 0;
+}
+
+.marquee-group span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  white-space: nowrap;
+}
+
+.marquee-group span.dot {
+  font-weight: 500;
+  font-size: 1rem;
+  opacity: 0.55;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ===== Offer cards (the 4 reactive cards) ===== */
@@ -351,8 +441,8 @@ p {
 
 .service-row:hover .service-row-word {
   opacity: 1;
-  color: var(--green-tint);
-  transform: translateY(-50%) translateX(-4px);
+  color: var(--lime-deep);
+  transform: translateY(-50%) translateX(-4px) rotate(-3deg);
 }
 
 .service-row-content {
@@ -931,5 +1021,19 @@ footer {
   .page-hero .container > * {
     opacity: 1;
     animation: none;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+
+  .spin-badge svg {
+    animation: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .spin-badge {
+    display: none;
   }
 }
