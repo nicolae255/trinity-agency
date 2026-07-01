@@ -31,11 +31,12 @@ if (cursorDot && cursorRing && window.matchMedia("(hover: hover) and (pointer: f
 }
 
 // Node network canvas (hero + prospecting section)
-function initNodeCanvas(canvas, { color = "214,255,74", count = 40 } = {}) {
+// Paused whenever its section is off-screen or the tab is backgrounded.
+function initNodeCanvas(canvas, { color = "214,255,74", count = 30 } = {}) {
   if (!canvas || prefersReducedMotion) return;
   const ctx = canvas.getContext("2d");
-  const dpr = window.devicePixelRatio || 1;
-  let width, height, nodes;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let width, height, nodes, rafId = null, isVisible = false;
 
   function resize() {
     width = canvas.width = canvas.offsetWidth * dpr;
@@ -85,19 +86,42 @@ function initNodeCanvas(canvas, { color = "214,255,74", count = 40 } = {}) {
       ctx.fill();
     });
 
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function play() {
+    if (rafId !== null || !isVisible || document.hidden) return;
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function pause() {
+    if (rafId === null) return;
+    cancelAnimationFrame(rafId);
+    rafId = null;
   }
 
   resize();
   makeNodes();
   window.addEventListener("resize", resize);
-  tick();
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pause();
+    else play();
+  });
+
+  new IntersectionObserver(
+    (entries) => {
+      isVisible = entries[0].isIntersecting;
+      if (isVisible) play();
+      else pause();
+    },
+    { threshold: 0.1 }
+  ).observe(canvas);
 }
 
 document.querySelectorAll(".node-canvas").forEach((canvas) => {
   initNodeCanvas(canvas, {
     color: canvas.dataset.color || "214,255,74",
-    count: Number(canvas.dataset.count) || 40,
+    count: Number(canvas.dataset.count) || 30,
   });
 });
 
@@ -189,17 +213,24 @@ if (navToggle && navMenu) {
   });
 }
 
-// Magnetic buttons
+// Magnetic buttons (rect cached on enter, not recomputed every mousemove)
 if (window.matchMedia("(hover: hover)").matches) {
   document.querySelectorAll(".btn-primary").forEach((btn) => {
+    let rect = null;
+
+    btn.addEventListener("mouseenter", () => {
+      rect = btn.getBoundingClientRect();
+    });
+
     btn.addEventListener("mousemove", (e) => {
-      const rect = btn.getBoundingClientRect();
+      if (!rect) return;
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
       btn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
     });
 
     btn.addEventListener("mouseleave", () => {
+      rect = null;
       btn.style.transform = "";
     });
   });
