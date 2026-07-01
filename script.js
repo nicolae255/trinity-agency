@@ -25,11 +25,3 @@ if (navToggle && navMenu) {
   });
 }
 
-// Navbar shrink/blur on scroll
-const navbar = document.querySelector(".navbar");
-
-if (navbar) {
-  window.addEventListener("scroll", () => {
-    navbar.classList.toggle("is-scrolled", window.scrollY > 40);
-  });
-}
