@@ -911,13 +911,6 @@ body.cursor-ready .cursor-ring {
   position: relative;
   overflow: hidden;
   border-top: 1px solid var(--border);
-  scroll-snap-align: start;
-}
-
-@media (min-width: 601px) {
-  html {
-    scroll-snap-type: y proximity;
-  }
 }
 
 .story-inner {

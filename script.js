@@ -1,14 +1,4 @@
-// Smooth scroll
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-if (typeof Lenis !== "undefined" && !prefersReducedMotion) {
-  const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-}
 
 // Custom cursor
 const cursorDot = document.querySelector(".cursor-dot");
