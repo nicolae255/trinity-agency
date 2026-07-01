@@ -1180,7 +1180,7 @@ body.cursor-ready .cursor-ring {
   z-index: 1;
   max-width: 640px;
   margin: 0 auto;
-  height: 320px;
+  height: 360px;
 }
 
 .browser-frame {
@@ -1406,24 +1406,6 @@ body.cursor-ready .cursor-ring {
 
 .proof-thumb {
   position: relative;
-}
-
-.proof-platform-badge {
-  position: absolute;
-  top: 0.9rem;
-  left: 0.9rem;
-  z-index: 1;
-  padding: 0.3rem 0.75rem;
-  border-radius: 999px;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .proof-card {
@@ -1861,7 +1843,7 @@ body.cursor-ready .cursor-ring {
   }
 
   .browser-stack {
-    height: 220px;
+    height: 250px;
   }
 }
 
