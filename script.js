@@ -167,6 +167,79 @@ if (pageTransition && !prefersReducedMotion) {
   });
 }
 
+// Chat widget
+// TODO: replace with your real Formspree endpoint (formspree.io -> new form ->
+// set the destination to nicolascojocari@yahoo.fr -> copy the form's endpoint URL).
+// Until this is set, submissions will fail with a visible error in the widget.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
+
+const chatWidget = document.getElementById("chatWidget");
+
+if (chatWidget) {
+  const chatToggle = document.getElementById("chatToggle");
+  const chatClose = document.getElementById("chatClose");
+  const chatForm = document.getElementById("chatForm");
+  const chatEmailInput = document.getElementById("chatEmail");
+  const chatMessageInput = document.getElementById("chatMessage");
+  const chatNextBtn = chatWidget.querySelector(".chat-next");
+  const chatError = document.getElementById("chatError");
+  const steps = {
+    1: chatWidget.querySelector('.chat-step[data-step="1"]'),
+    2: chatWidget.querySelector('.chat-step[data-step="2"]'),
+    done: chatWidget.querySelector('.chat-step[data-step="done"]'),
+  };
+
+  const openChat = () => chatWidget.classList.add("is-open");
+  const closeChat = () => chatWidget.classList.remove("is-open");
+
+  chatToggle.addEventListener("click", () => {
+    chatWidget.classList.contains("is-open") ? closeChat() : openChat();
+  });
+
+  chatClose.addEventListener("click", closeChat);
+
+  chatNextBtn.addEventListener("click", () => {
+    if (!chatEmailInput.checkValidity()) {
+      chatEmailInput.reportValidity();
+      return;
+    }
+    steps[1].hidden = true;
+    steps[2].hidden = false;
+    chatMessageInput.focus();
+  });
+
+  chatForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!chatMessageInput.checkValidity()) {
+      chatMessageInput.reportValidity();
+      return;
+    }
+
+    chatError.classList.remove("is-visible");
+    const submitBtn = steps[2].querySelector("button[type=submit]");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(chatForm),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      steps[2].hidden = true;
+      steps.done.hidden = false;
+    } catch (err) {
+      chatError.textContent = "Something went wrong — email us directly at hello@trinity-agency.com instead.";
+      chatError.classList.add("is-visible");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send";
+    }
+  });
+}
+
 // Intro loader
 const loader = document.getElementById("loader");
 
