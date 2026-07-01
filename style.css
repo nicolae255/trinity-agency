@@ -344,54 +344,6 @@ p {
   transform: rotate(0deg) scale(1.05);
 }
 
-/* ===== Marquee ticker ===== */
-.marquee {
-  background: var(--lime);
-  overflow: hidden;
-  padding: 1.15rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  width: max-content;
-  animation: marqueeScroll 26s linear infinite;
-}
-
-.marquee-group {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  flex-shrink: 0;
-}
-
-.marquee-group span {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--ink);
-  white-space: nowrap;
-}
-
-.marquee-group span.dot {
-  font-weight: 500;
-  font-size: 1rem;
-  opacity: 0.55;
-}
-
-@keyframes marqueeScroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 /* ===== Service cards ===== */
 .service-grid {
   display: grid;
@@ -1504,10 +1456,6 @@ body.cursor-ready .cursor-ring {
   .hero-content > *,
   .page-hero .container > * {
     opacity: 1;
-    animation: none;
-  }
-
-  .marquee-track {
     animation: none;
   }
 
