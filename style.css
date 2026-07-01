@@ -860,77 +860,7 @@ body.cursor-ready .cursor-ring {
   flex-shrink: 0;
 }
 
-/* ===== Section nav (right-side dots) ===== */
-.section-nav {
-  position: fixed;
-  right: 1.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 90;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: flex-end;
-}
-
-.section-nav-dot {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0.35rem;
-}
-
-.section-nav-dot span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
-  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
-  display: block;
-}
-
-.section-nav-dot::before {
-  content: attr(data-label);
-  position: absolute;
-  right: calc(100% + 0.6rem);
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: var(--text);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--radius-full);
-  opacity: 0;
-  transform: translateX(6px);
-  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-.section-nav-dot:hover::before {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.section-nav-dot:hover span {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.section-nav-dot.is-active span {
-  background: var(--lime);
-  transform: scale(1.4);
-}
-
-@media (max-width: 900px) {
-  .section-nav {
-    display: none;
-  }
-}
-
-/* ===== Story nav (minimal) ===== */
+/* ===== Story nav (persistent, with real links) ===== */
 .story-nav {
   position: fixed;
   top: 0;
@@ -940,23 +870,91 @@ body.cursor-ready .cursor-ring {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.75rem 2rem;
-  mix-blend-mode: difference;
+  padding: 1.15rem 2rem;
+  background: rgba(10, 12, 10, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
 
 .story-nav .logo {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.15rem;
-  color: #fff;
+  color: var(--text);
 }
 
 .story-nav .logo span {
   color: var(--lime);
 }
 
-.story-nav a.btn {
-  mix-blend-mode: normal;
+.story-nav nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.story-nav nav a:not(.btn) {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.3s var(--ease);
+}
+
+.story-nav nav a:not(.btn):hover {
+  color: var(--text);
+}
+
+/* ===== Services dropdown ===== */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > a::after {
+  content: "\25BE";
+  margin-left: 0.35rem;
+  font-size: 0.7em;
+  opacity: 0.7;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 1.1rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 230px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.6rem;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem !important;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text) !important;
 }
 
 .progress-rail {
@@ -1354,7 +1352,8 @@ body.cursor-ready .cursor-ring {
     grid-template-columns: 1fr;
   }
 
-  .navbar nav {
+  .navbar nav,
+  .story-nav nav {
     display: none;
     position: absolute;
     top: calc(100% + 0.5rem);
@@ -1367,14 +1366,34 @@ body.cursor-ready .cursor-ring {
     padding: 1.5rem;
   }
 
-  .navbar nav.is-open {
+  .navbar nav.is-open,
+  .story-nav nav.is-open {
     display: block;
   }
 
-  .navbar nav ul {
+  .navbar nav ul,
+  .story-nav nav ul {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0.5rem 0 0 1rem;
+    margin-top: 0.5rem;
+    display: none;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-menu {
+    display: block;
   }
 
   .nav-toggle {
