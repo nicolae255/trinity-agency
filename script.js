@@ -190,7 +190,40 @@ if (chatWidget) {
   const openChat = () => chatWidget.classList.add("is-open");
   const closeChat = () => chatWidget.classList.remove("is-open");
 
+  // Teaser popup: invites visitors to chat a few seconds after page load
+  const chatTeaser = document.getElementById("chatTeaser");
+  const chatTeaserClose = document.getElementById("chatTeaserClose");
+
+  const dismissTeaser = () => {
+    if (!chatTeaser) return;
+    chatTeaser.classList.remove("is-visible");
+    sessionStorage.setItem("chatTeaserDismissed", "1");
+  };
+
+  if (chatTeaser && !prefersReducedMotion && !sessionStorage.getItem("chatTeaserDismissed")) {
+    window.setTimeout(() => {
+      if (!chatWidget.classList.contains("is-open")) {
+        chatTeaser.classList.add("is-visible");
+      }
+    }, 3000);
+  }
+
+  if (chatTeaserClose) {
+    chatTeaserClose.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dismissTeaser();
+    });
+  }
+
+  if (chatTeaser) {
+    chatTeaser.addEventListener("click", () => {
+      dismissTeaser();
+      openChat();
+    });
+  }
+
   chatToggle.addEventListener("click", () => {
+    dismissTeaser();
     chatWidget.classList.contains("is-open") ? closeChat() : openChat();
   });
 

@@ -1480,6 +1480,55 @@ body.cursor-ready .cursor-ring {
   z-index: 9000;
 }
 
+.chat-teaser {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 1rem);
+  width: 230px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  border-bottom-right-radius: 4px;
+  padding: 0.9rem 2rem 0.9rem 1rem;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
+  cursor: pointer;
+}
+
+.chat-teaser.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.chat-teaser p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.chat-teaser-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--faint);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.chat-teaser-close:hover {
+  color: var(--text);
+}
+
 .chat-toggle {
   width: 58px;
   height: 58px;
