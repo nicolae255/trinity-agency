@@ -220,27 +220,68 @@ p {
   cursor: pointer;
 }
 
-/* ===== Hero ===== */
+/* ===== Hero (bold, full-bleed brand color) ===== */
 .hero {
-  padding-top: 3rem;
-  padding-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+  padding-top: 9rem;
+  padding-bottom: 7rem;
+  background: var(--green-deep);
+  color: #fff;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 480px;
+  height: 480px;
+  background: rgba(255, 255, 255, 0.08);
+  top: -180px;
+  right: -120px;
+}
+
+.hero::after {
+  width: 420px;
+  height: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  bottom: -200px;
+  left: -140px;
+}
+
+.hero .eyebrow {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.hero .eyebrow::before {
+  background: #fff;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
 }
 
 .hero h1 {
   margin-bottom: 1.5rem;
-  color: var(--ink);
+  color: #fff;
 }
 
 .hero h1 .highlight {
-  color: var(--green);
+  color: var(--green-soft);
 }
 
 .hero p.lead {
-  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.2rem;
   max-width: 560px;
   margin-bottom: 2.5rem;
 }
@@ -250,6 +291,24 @@ p {
   gap: 1rem;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.hero .btn-primary {
+  background: #fff;
+  color: var(--green-deep);
+}
+
+.hero .btn-primary:hover {
+  background: var(--green-soft);
+}
+
+.hero .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.hero .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ===== Offer cards (the 4 reactive cards) ===== */
@@ -289,8 +348,13 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   margin-bottom: 1.75rem;
+}
+
+.offer-icon svg,
+.contact-info-icon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .offer-card h3 {
@@ -497,37 +561,159 @@ footer {
   transform: translateY(0);
 }
 
+/* ===== Intro loader (homepage) ===== */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-deep);
+  transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.25rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: loaderReveal 0.7s var(--ease) 0.1s forwards;
+}
+
+.loader-logo span {
+  color: var(--green-soft);
+}
+
+@keyframes loaderReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Hero entrance animation ===== */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content > *,
+.page-hero .container > * {
+  opacity: 0;
+  animation: heroFadeUp 0.8s var(--ease) forwards;
+}
+
+/* Homepage hero waits for the intro loader to clear first */
+.hero-content > *:nth-child(1) { animation-delay: 0.55s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.68s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.8s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.92s; }
+.hero-content > *:nth-child(5) { animation-delay: 1.04s; }
+
+/* Subpages have no loader, so animate in right away */
+.page-hero .container > *:nth-child(1) { animation-delay: 0.1s; }
+.page-hero .container > *:nth-child(2) { animation-delay: 0.22s; }
+.page-hero .container > *:nth-child(3) { animation-delay: 0.34s; }
+.page-hero .container > *:nth-child(4) { animation-delay: 0.46s; }
+.page-hero .container > *:nth-child(5) { animation-delay: 0.58s; }
+
 /* ===== Page hero (service/contact pages) ===== */
 .page-hero {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  padding-top: 8.5rem;
+  padding-bottom: 4.5rem;
+  background: var(--green-deep);
+  color: #fff;
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(90px);
+  background: rgba(255, 255, 255, 0.07);
+  top: -160px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .page-hero h1 {
-  color: var(--ink);
+  color: #fff;
 }
 
 .page-hero .eyebrow {
   margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.page-hero .eyebrow::before {
+  background: #fff;
 }
 
 .page-hero p.lead {
+  color: rgba(255, 255, 255, 0.72);
   font-size: 1.1rem;
   max-width: 600px;
 }
 
+.page-hero .btn-primary {
+  background: #fff;
+  color: var(--green-deep);
+}
+
+.page-hero .btn-primary:hover {
+  background: var(--green-soft);
+}
+
+.page-hero .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.page-hero .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .breadcrumb {
   font-size: 0.85rem;
-  color: var(--faint);
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: 1.5rem;
 }
 
 .breadcrumb a {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .breadcrumb a:hover {
-  color: var(--ink);
+  color: #fff;
 }
 
 /* ===== Feature list (service pages) ===== */
@@ -700,5 +886,15 @@ footer {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .loader {
+    display: none;
+  }
+
+  .hero-content > *,
+  .page-hero .container > * {
+    opacity: 1;
+    animation: none;
   }
 }

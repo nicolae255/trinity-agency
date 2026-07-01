@@ -1,3 +1,12 @@
+// Intro loader
+const loader = document.getElementById("loader");
+
+if (loader) {
+  window.setTimeout(() => {
+    loader.classList.add("is-hidden");
+  }, 700);
+}
+
 // Scroll reveal
 const revealEls = document.querySelectorAll(".reveal");
 
