@@ -316,26 +316,52 @@ p {
   padding-top: 1rem;
 }
 
-.offer-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+.service-list {
+  border-top: 1px solid var(--card-border);
 }
 
-.offer-card {
+.service-row {
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 260px;
-  padding: 2.25rem;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--card-border);
   cursor: pointer;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
 }
 
-.offer-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
+.service-row-word {
+  position: absolute;
+  right: -0.02em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(4.5rem, 13vw, 10.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  opacity: 0.08;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease), color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.service-row:hover .service-row-word {
+  opacity: 1;
+  color: var(--green-tint);
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.service-row-content {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+}
+
+.service-row:hover {
   border-color: var(--green-soft);
 }
 
@@ -348,7 +374,13 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+.service-row:hover .offer-icon {
+  background: var(--green);
+  color: #fff;
 }
 
 .offer-icon svg,
@@ -357,22 +389,21 @@ p {
   height: 22px;
 }
 
-.offer-card h3 {
-  font-size: 1.35rem;
+.service-row-content h3 {
+  font-size: 1.4rem;
   margin-bottom: 0.6rem;
   color: var(--ink);
 }
 
-.offer-card p {
-  font-size: 0.95rem;
-  margin-bottom: 1.75rem;
+.service-row-content p {
+  font-size: 0.98rem;
+  margin-bottom: 1.5rem;
 }
 
 .offer-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  align-self: flex-start;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.88rem;
@@ -380,7 +411,7 @@ p {
   transition: gap 0.3s var(--ease);
 }
 
-.offer-card:hover .offer-link {
+.service-row:hover .offer-link {
   gap: 0.8rem;
 }
 
@@ -817,9 +848,13 @@ footer {
 
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
-  .offer-grid,
   .feature-grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-row-word {
+    font-size: clamp(3.5rem, 20vw, 6rem);
+    opacity: 0.06;
   }
 
   .stats-grid {
