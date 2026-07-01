@@ -741,6 +741,10 @@ body.cursor-ready .cursor-ring {
   z-index: 1;
 }
 
+.page-hero h1 {
+  margin-bottom: 1.5rem;
+}
+
 .page-hero p.lead {
   color: var(--muted);
   font-size: 1.15rem;
