@@ -131,6 +131,26 @@ const storyObserver = new IntersectionObserver(
 
 storySections.forEach((el) => storyObserver.observe(el));
 
+// Section nav active-dot tracking
+const sectionNavDots = document.querySelectorAll(".section-nav-dot");
+
+if (sectionNavDots.length) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const dot = document.querySelector(`.section-nav-dot[href="#${entry.target.id}"]`);
+        if (!dot) return;
+        sectionNavDots.forEach((d) => d.classList.remove("is-active"));
+        dot.classList.add("is-active");
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll(".story-section[id]").forEach((el) => navObserver.observe(el));
+}
+
 // Scroll progress rail
 const progressFill = document.querySelector(".progress-rail-fill");
 
