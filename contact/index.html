@@ -74,7 +74,7 @@
           </div>
         </div>
       </li>
-      <li><a href="../#offer">Our Offer</a></li>
+      <li><a href="../build-your-marketing/">Our Offer</a></li>
       <li><a href="../blog/">Blog</a></li>
       <li><a href="../#proof">Our Work</a></li>
       <li><a href="../contact/">Contact</a></li>
@@ -118,9 +118,10 @@
         <div class="form-group">
           <label for="interest">What are you interested in?</label>
           <select id="interest" name="interest">
-            <option value="Organic Boost">Organic Boost</option>
-            <option value="Promotional Marketing">Promotional Marketing</option>
-            <option value="Find Prospects">Find Prospects</option>
+            <option value="Organic Growth">Organic Growth</option>
+            <option value="Paid Growth">Paid Growth</option>
+            <option value="Lead Generation">Lead Generation</option>
+            <option value="Web Presence">Web Presence</option>
             <option value="Not sure yet">Not sure yet</option>
           </select>
         </div>
@@ -250,6 +251,13 @@
 
 <script src="../script.js"></script>
 <script>
+  const prefillMessage = sessionStorage.getItem("foundPrefillMessage");
+  if (prefillMessage) {
+    const messageField = document.getElementById("message");
+    if (messageField) messageField.value = prefillMessage;
+    sessionStorage.removeItem("foundPrefillMessage");
+  }
+
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", (e) => {

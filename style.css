@@ -1635,6 +1635,22 @@ body.cursor-ready .cursor-dot {
   font-size: 0.95rem;
 }
 
+.offer-tool-teaser {
+  padding: 2.5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.offer-tool-teaser h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.offer-tool-teaser p {
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+}
+
 .simulator {
   padding: 2.5rem;
   margin-top: 1rem;
@@ -1668,6 +1684,47 @@ body.cursor-ready .cursor-dot {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.simulator-subchips.detailed {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.75rem;
+}
+
+.simulator-subchips.detailed .sim-subchip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md);
+  height: 100%;
+}
+
+.sim-subchip-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.sim-subchip-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.sim-subchip.is-active .sim-subchip-desc {
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+.simulator-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--emerald);
+  min-height: 1.2rem;
 }
 
 .sim-subchip {
