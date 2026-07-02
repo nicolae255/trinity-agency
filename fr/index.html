@@ -282,7 +282,7 @@
     <div class="chat-panel-body">
       <form id="chatForm">
         <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
-        <input type="hidden" name="subject" value="New chat inquiry from trinity-agency.com (FR)">
+        <input type="hidden" name="subject" value="New chat inquiry from foundagency.be (FR)">
         <input type="hidden" name="from_name" value="Found Chat Widget">
         <div class="chat-step" data-step="1">
           <div class="chat-bubble">Bonjour ! Quel est le meilleur email pour vous contacter ?</div>
@@ -318,13 +318,13 @@
     ctaForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const data = new FormData(ctaForm);
-      const subject = encodeURIComponent("Nouvelle demande depuis trinity-agency.com");
+      const subject = encodeURIComponent("Nouvelle demande depuis foundagency.be");
       const body = encodeURIComponent(
         "Nom : " + data.get("name") +
         "\nEmail : " + data.get("email") +
         "\n\nMessage :\n" + data.get("message")
       );
-      window.location.href = "mailto:hello@trinity-agency.com?subject=" + subject + "&body=" + body;
+      window.location.href = "mailto:hello@foundagency.be?subject=" + subject + "&body=" + body;
     });
   }
 </script>

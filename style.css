@@ -798,6 +798,17 @@ body.cursor-ready .cursor-dot {
   margin-top: 2.5rem;
 }
 
+.region-note {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius-lg);
+  background: rgba(52, 211, 153, 0.06);
+  border: 1px solid rgba(52, 211, 153, 0.18);
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 760px;
+}
+
 .feature-card {
   padding: 1.85rem;
 }
@@ -1600,6 +1611,121 @@ body.cursor-ready .cursor-dot {
 .testimonial-card span {
   font-size: 0.85rem;
   color: var(--faint);
+}
+
+/* ===== Our Offer / simulator ===== */
+.offer-paths {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin: 2.5rem 0;
+}
+
+.offer-path-card {
+  padding: 2rem;
+}
+
+.offer-path-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--lime);
+}
+
+.offer-path-card p {
+  font-size: 0.95rem;
+}
+
+.simulator {
+  padding: 2.5rem;
+  margin-top: 1rem;
+}
+
+.simulator h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.simulator-intro {
+  margin-bottom: 1.75rem;
+}
+
+.simulator-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.sim-chip {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.65rem 1.2rem;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.sim-chip:hover {
+  border-color: var(--emerald);
+  color: var(--text);
+}
+
+.sim-chip.is-active {
+  background: var(--gradient);
+  border-color: transparent;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.simulator-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+  min-height: 3rem;
+}
+
+.simulator-placeholder {
+  color: var(--faint);
+  font-size: 0.92rem;
+}
+
+.simulator-result-card {
+  background: rgba(52, 211, 153, 0.06);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.4rem;
+}
+
+.simulator-result-card p {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.simulator-result-card.is-full {
+  background: rgba(214, 255, 74, 0.08);
+  border-color: rgba(214, 255, 74, 0.25);
+}
+
+.simulator-result-card.is-full h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--lime);
+}
+
+.simulator-result-card.is-full p {
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .offer-paths {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== System flow diagram ===== */
