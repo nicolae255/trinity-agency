@@ -499,8 +499,10 @@ footer {
   font-weight: 800;
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
-  display: block;
   color: var(--text);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer-brand .logo span {
@@ -908,6 +910,9 @@ body.cursor-ready .cursor-dot {
   font-weight: 800;
   font-size: 1.15rem;
   color: var(--text);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .story-nav .logo span {
