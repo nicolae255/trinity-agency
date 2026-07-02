@@ -504,7 +504,13 @@ footer {
 }
 
 .footer-brand .logo span {
-  color: var(--lime);
+  display: block;
+  width: 30px;
+  height: 3px;
+  margin-top: 6px;
+  background: var(--emerald);
+  border-radius: 2px;
+  font-size: 0;
 }
 
 .footer-brand p {
@@ -669,12 +675,19 @@ body.cursor-ready .cursor-dot {
   font-size: 2.25rem;
   color: var(--text);
   letter-spacing: -0.02em;
+  text-align: center;
   opacity: 0;
   animation: loaderReveal 0.7s var(--ease) 0.1s forwards;
 }
 
 .loader-logo span {
-  color: var(--lime);
+  display: block;
+  width: 52px;
+  height: 4px;
+  margin: 8px auto 0;
+  background: var(--emerald);
+  border-radius: 2px;
+  font-size: 0;
 }
 
 @keyframes loaderReveal {
@@ -898,7 +911,13 @@ body.cursor-ready .cursor-dot {
 }
 
 .story-nav .logo span {
-  color: var(--lime);
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin-top: 5px;
+  background: var(--emerald);
+  border-radius: 2px;
+  font-size: 0;
 }
 
 .story-nav nav ul {
