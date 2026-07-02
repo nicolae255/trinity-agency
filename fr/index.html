@@ -81,7 +81,7 @@
           </div>
         </div>
       </li>
-      <li><a href="#offer">Notre Offre</a></li>
+      <li><a href="construisez-votre-marketing/">Notre Offre</a></li>
       <li><a href="../blog/">Blog</a></li>
       <li><a href="#proof">Nos réalisations</a></li>
       <li><a href="contact/">Contact</a></li>
@@ -177,59 +177,10 @@
         </div>
       </div>
 
-      <div class="simulator glass reveal">
-        <h3>Construisez Votre Marketing</h3>
-        <p class="simulator-intro">Choisissez un levier, puis combinez les éléments dont vous avez besoin — l'ampleur s'ajuste au fur et à mesure.</p>
-
-        <div class="simulator-groups" id="simGroups">
-          <div class="simulator-group">
-            <p class="simulator-group-label">Croissance Organique</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="seo">SEO</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="content">Marketing de Contenu</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="social">Réseaux Sociaux</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="gbp">Google Business Profile</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="email">Email Nurture</button>
-            </div>
-          </div>
-          <div class="simulator-group">
-            <p class="simulator-group-label">Croissance Payante</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="social">Publicité Sociale</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="search">Recherche Payante</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="retargeting">Retargeting</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="display">Display &amp; Programmatique</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="video">Publicités Vidéo</button>
-            </div>
-          </div>
-          <div class="simulator-group">
-            <p class="simulator-group-label">Génération de Leads</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="outbound">Prospection Sortante</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="funnels">Tunnels &amp; Landing Pages</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="crm">CRM &amp; Scoring</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="magnets">Lead Magnets</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="automation">Automatisation Marketing</button>
-            </div>
-          </div>
-          <div class="simulator-group">
-            <p class="simulator-group-label">Présence Web</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="design">Conception &amp; Développement</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="cro">CRO</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="ecommerce">E-commerce</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="landing">Landing Pages de Campagne</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="speed">Vitesse &amp; Analytics</button>
-            </div>
-          </div>
-        </div>
-
-        <button type="button" class="simulator-unsure" id="simUnsure">Pas sûr(e) de ce dont vous avez besoin ? <span>Nous recommandons le Système Complet &rarr;</span></button>
-
-        <div class="simulator-results" id="simResults">
-          <p class="simulator-placeholder">Sélectionnez vos besoins ci-dessus pour voir notre recommandation.</p>
-        </div>
-        <a href="#contact-cta" class="btn btn-primary sim-cta" id="simCta" style="display:none;">Discutons-en &rarr;</a>
+      <div class="offer-tool-teaser glass reveal">
+        <h3>Vous ne savez pas lequel choisir ?</h3>
+        <p>Répondez à quelques questions simples — sans jargon marketing — et nous vous dirons exactement ce qui convient, et l'ampleur approximative du projet.</p>
+        <a href="construisez-votre-marketing/" class="btn btn-primary">Construisez Votre Marketing &rarr;</a>
       </div>
     </div>
   </section>
@@ -436,122 +387,6 @@
     });
   }
 
-  const simGroups = document.getElementById("simGroups");
-  if (simGroups) {
-    const PILLAR_LABELS = { organic: "Croissance Organique", paid: "Croissance Payante", leadgen: "Génération de Leads", webpresence: "Présence Web" };
-    const SUB_LABELS = {
-      organic: { seo: "SEO", content: "Marketing de Contenu", social: "Réseaux Sociaux", gbp: "Google Business Profile", email: "Email Nurture" },
-      paid: { social: "Publicité Sociale", search: "Recherche Payante", retargeting: "Retargeting", display: "Display & Programmatique", video: "Publicités Vidéo" },
-      leadgen: { outbound: "Prospection Sortante", funnels: "Tunnels & Landing Pages", crm: "CRM & Scoring", magnets: "Lead Magnets", automation: "Automatisation Marketing" },
-      webpresence: { design: "Conception & Développement", cro: "CRO", ecommerce: "E-commerce", landing: "Landing Pages de Campagne", speed: "Vitesse & Analytics" },
-    };
-
-    const simResults = document.getElementById("simResults");
-    const simCta = document.getElementById("simCta");
-    const simUnsure = document.getElementById("simUnsure");
-    const selected = {};
-    let unsureActive = false;
-
-    simGroups.addEventListener("click", (e) => {
-      const chip = e.target.closest(".sim-subchip");
-      if (!chip) return;
-      unsureActive = false;
-      simUnsure.classList.remove("is-active");
-      const pillar = chip.dataset.pillar;
-      const sub = chip.dataset.sub;
-      if (!selected[pillar]) selected[pillar] = new Set();
-      if (selected[pillar].has(sub)) {
-        selected[pillar].delete(sub);
-        chip.classList.remove("is-active");
-        if (selected[pillar].size === 0) delete selected[pillar];
-      } else {
-        selected[pillar].add(sub);
-        chip.classList.add("is-active");
-      }
-      renderSimResults();
-    });
-
-    simUnsure.addEventListener("click", () => {
-      unsureActive = !unsureActive;
-      simUnsure.classList.toggle("is-active", unsureActive);
-      if (unsureActive) {
-        Object.keys(selected).forEach((p) => delete selected[p]);
-        simGroups.querySelectorAll(".sim-subchip.is-active").forEach((c) => c.classList.remove("is-active"));
-      }
-      renderSimResults();
-    });
-
-    function tierMarkup(tier, name) {
-      let symbols = "";
-      for (let i = 1; i <= 3; i++) {
-        symbols += '<span class="tier-symbol' + (i <= tier ? " is-filled" : "") + '">&euro;</span>';
-      }
-      return '<div class="simulator-tier"><span class="tier-label">Ampleur estimée</span><span class="tier-symbols">' + symbols + '</span><span class="tier-name">' + name + "</span></div>";
-    }
-
-    function renderSimResults() {
-      const pillarKeys = Object.keys(selected);
-      const totalSubs = pillarKeys.reduce((sum, p) => sum + selected[p].size, 0);
-
-      if (unsureActive) {
-        simResults.innerHTML =
-          '<div class="simulator-result-card is-full">' +
-          "<h4>Notre recommandation : Système Complet</h4>" +
-          "<p>Organique, payant, génération de leads et votre site web — fonctionnant ensemble comme un seul système, pas quatre pièces séparées.</p>" +
-          tierMarkup(3, "Système Complet") +
-          "</div>";
-        simCta.style.display = "inline-flex";
-        return;
-      }
-
-      if (totalSubs === 0) {
-        simResults.innerHTML = '<p class="simulator-placeholder">Sélectionnez vos besoins ci-dessus pour voir notre recommandation.</p>';
-        simCta.style.display = "none";
-        return;
-      }
-
-      if (pillarKeys.length >= 3 || totalSubs >= 6) {
-        simResults.innerHTML =
-          '<div class="simulator-result-card is-full">' +
-          "<h4>Notre recommandation : Système Complet</h4>" +
-          "<p>D'après votre sélection, vous avez besoin de plus d'une pièce — organique, payant, génération de leads et votre site web fonctionnant ensemble comme un seul système.</p>" +
-          tierMarkup(3, "Système Complet") +
-          "</div>";
-      } else {
-        const groupCards = pillarKeys.map((p) => {
-          const subs = Array.from(selected[p]).map((s) => SUB_LABELS[p][s]).join(", ");
-          return '<div class="simulator-result-card"><h4>' + PILLAR_LABELS[p] + "</h4><p>" + subs + "</p></div>";
-        }).join("");
-        const tier = totalSubs >= 3 ? 2 : 1;
-        const tierName = tier === 2 ? "Croissance" : "Essentiel";
-        simResults.innerHTML = groupCards + tierMarkup(tier, tierName);
-      }
-
-      simCta.style.display = "inline-flex";
-    }
-
-    simCta.addEventListener("click", (e) => {
-      e.preventDefault();
-      let message;
-      if (unsureActive) {
-        message = "Je ne sais pas par où commencer — recommandez-moi le Système Complet.";
-      } else {
-        const parts = Object.keys(selected).map((p) => {
-          const subs = Array.from(selected[p]).map((s) => SUB_LABELS[p][s]).join(", ");
-          return PILLAR_LABELS[p] + " (" + subs + ")";
-        });
-        message = "Je suis intéressé(e) par : " + parts.join("; ");
-      }
-      const ctaMessage = document.getElementById("cta-message");
-      if (ctaMessage) {
-        ctaMessage.value = message;
-      }
-      const contactSection = document.getElementById("contact-cta");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  }
 </script>
 </body>
 </html>

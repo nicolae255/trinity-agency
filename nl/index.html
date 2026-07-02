@@ -81,7 +81,7 @@
           </div>
         </div>
       </li>
-      <li><a href="#offer">Ons Aanbod</a></li>
+      <li><a href="bouw-uw-marketing/">Ons Aanbod</a></li>
       <li><a href="../blog/">Blog</a></li>
       <li><a href="#proof">Ons werk</a></li>
       <li><a href="contact/">Contact</a></li>
@@ -177,59 +177,10 @@
         </div>
       </div>
 
-      <div class="simulator glass reveal">
-        <h3>Bouw Uw Marketing</h3>
-        <p class="simulator-intro">Kies een pijler, combineer vervolgens de specifieke onderdelen die u nodig heeft — de omvang past zich automatisch aan.</p>
-
-        <div class="simulator-groups" id="simGroups">
-          <div class="simulator-group">
-            <p class="simulator-group-label">Organische Groei</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="seo">SEO</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="content">Contentmarketing</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="social">Sociale Media</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="gbp">Google Bedrijfsprofiel</button>
-              <button type="button" class="sim-subchip" data-pillar="organic" data-sub="email">E-mail Nurture</button>
-            </div>
-          </div>
-          <div class="simulator-group">
-            <p class="simulator-group-label">Betaalde Groei</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="social">Betaalde Social</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="search">Betaalde Zoekadvertenties</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="retargeting">Retargeting</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="display">Display &amp; Programmatic</button>
-              <button type="button" class="sim-subchip" data-pillar="paid" data-sub="video">Video-advertenties</button>
-            </div>
-          </div>
-          <div class="simulator-group">
-            <p class="simulator-group-label">Leadgeneratie</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="outbound">Outbound Prospectie</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="funnels">Funnels &amp; Landingspagina's</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="crm">CRM &amp; Lead Scoring</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="magnets">Lead Magnets</button>
-              <button type="button" class="sim-subchip" data-pillar="leadgen" data-sub="automation">Marketingautomatisering</button>
-            </div>
-          </div>
-          <div class="simulator-group">
-            <p class="simulator-group-label">Web Aanwezigheid</p>
-            <div class="simulator-subchips">
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="design">Website Ontwerp &amp; Ontwikkeling</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="cro">CRO</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="ecommerce">E-commerce</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="landing">Campagnelandingspagina's</button>
-              <button type="button" class="sim-subchip" data-pillar="webpresence" data-sub="speed">Sitesnelheid &amp; Analytics</button>
-            </div>
-          </div>
-        </div>
-
-        <button type="button" class="simulator-unsure" id="simUnsure">Niet zeker wat u nodig heeft? <span>Wij adviseren het Volledige Systeem &rarr;</span></button>
-
-        <div class="simulator-results" id="simResults">
-          <p class="simulator-placeholder">Selecteer hierboven wat u nodig heeft om onze aanbeveling te zien.</p>
-        </div>
-        <a href="#contact-cta" class="btn btn-primary sim-cta" id="simCta" style="display:none;">Laten we hierover praten &rarr;</a>
+      <div class="offer-tool-teaser glass reveal">
+        <h3>Niet zeker welke u nodig heeft?</h3>
+        <p>Beantwoord een paar eenvoudige vragen — geen marketingjargon — en wij vertellen u precies wat past, en hoe groot de opdracht ongeveer is.</p>
+        <a href="bouw-uw-marketing/" class="btn btn-primary">Bouw Uw Marketing &rarr;</a>
       </div>
     </div>
   </section>
@@ -436,122 +387,6 @@
     });
   }
 
-  const simGroups = document.getElementById("simGroups");
-  if (simGroups) {
-    const PILLAR_LABELS = { organic: "Organische Groei", paid: "Betaalde Groei", leadgen: "Leadgeneratie", webpresence: "Web Aanwezigheid" };
-    const SUB_LABELS = {
-      organic: { seo: "SEO", content: "Contentmarketing", social: "Sociale Media", gbp: "Google Bedrijfsprofiel", email: "E-mail Nurture" },
-      paid: { social: "Betaalde Social", search: "Betaalde Zoekadvertenties", retargeting: "Retargeting", display: "Display & Programmatic", video: "Video-advertenties" },
-      leadgen: { outbound: "Outbound Prospectie", funnels: "Funnels & Landingspagina's", crm: "CRM & Lead Scoring", magnets: "Lead Magnets", automation: "Marketingautomatisering" },
-      webpresence: { design: "Website Ontwerp & Ontwikkeling", cro: "CRO", ecommerce: "E-commerce", landing: "Campagnelandingspagina's", speed: "Sitesnelheid & Analytics" },
-    };
-
-    const simResults = document.getElementById("simResults");
-    const simCta = document.getElementById("simCta");
-    const simUnsure = document.getElementById("simUnsure");
-    const selected = {};
-    let unsureActive = false;
-
-    simGroups.addEventListener("click", (e) => {
-      const chip = e.target.closest(".sim-subchip");
-      if (!chip) return;
-      unsureActive = false;
-      simUnsure.classList.remove("is-active");
-      const pillar = chip.dataset.pillar;
-      const sub = chip.dataset.sub;
-      if (!selected[pillar]) selected[pillar] = new Set();
-      if (selected[pillar].has(sub)) {
-        selected[pillar].delete(sub);
-        chip.classList.remove("is-active");
-        if (selected[pillar].size === 0) delete selected[pillar];
-      } else {
-        selected[pillar].add(sub);
-        chip.classList.add("is-active");
-      }
-      renderSimResults();
-    });
-
-    simUnsure.addEventListener("click", () => {
-      unsureActive = !unsureActive;
-      simUnsure.classList.toggle("is-active", unsureActive);
-      if (unsureActive) {
-        Object.keys(selected).forEach((p) => delete selected[p]);
-        simGroups.querySelectorAll(".sim-subchip.is-active").forEach((c) => c.classList.remove("is-active"));
-      }
-      renderSimResults();
-    });
-
-    function tierMarkup(tier, name) {
-      let symbols = "";
-      for (let i = 1; i <= 3; i++) {
-        symbols += '<span class="tier-symbol' + (i <= tier ? " is-filled" : "") + '">&euro;</span>';
-      }
-      return '<div class="simulator-tier"><span class="tier-label">Geschatte omvang</span><span class="tier-symbols">' + symbols + '</span><span class="tier-name">' + name + "</span></div>";
-    }
-
-    function renderSimResults() {
-      const pillarKeys = Object.keys(selected);
-      const totalSubs = pillarKeys.reduce((sum, p) => sum + selected[p].size, 0);
-
-      if (unsureActive) {
-        simResults.innerHTML =
-          '<div class="simulator-result-card is-full">' +
-          "<h4>Onze aanbeveling: Volledig Systeem</h4>" +
-          "<p>Organisch, betaald, leadgeneratie en uw website — samen werkend als één systeem, geen vier aparte onderdelen.</p>" +
-          tierMarkup(3, "Volledig Systeem") +
-          "</div>";
-        simCta.style.display = "inline-flex";
-        return;
-      }
-
-      if (totalSubs === 0) {
-        simResults.innerHTML = '<p class="simulator-placeholder">Selecteer hierboven wat u nodig heeft om onze aanbeveling te zien.</p>';
-        simCta.style.display = "none";
-        return;
-      }
-
-      if (pillarKeys.length >= 3 || totalSubs >= 6) {
-        simResults.innerHTML =
-          '<div class="simulator-result-card is-full">' +
-          "<h4>Onze aanbeveling: Volledig Systeem</h4>" +
-          "<p>Op basis van uw selectie heeft u meer dan één onderdeel nodig — organisch, betaald, leadgeneratie en uw website die samen als één systeem werken.</p>" +
-          tierMarkup(3, "Volledig Systeem") +
-          "</div>";
-      } else {
-        const groupCards = pillarKeys.map((p) => {
-          const subs = Array.from(selected[p]).map((s) => SUB_LABELS[p][s]).join(", ");
-          return '<div class="simulator-result-card"><h4>' + PILLAR_LABELS[p] + "</h4><p>" + subs + "</p></div>";
-        }).join("");
-        const tier = totalSubs >= 3 ? 2 : 1;
-        const tierName = tier === 2 ? "Groei" : "Basis";
-        simResults.innerHTML = groupCards + tierMarkup(tier, tierName);
-      }
-
-      simCta.style.display = "inline-flex";
-    }
-
-    simCta.addEventListener("click", (e) => {
-      e.preventDefault();
-      let message;
-      if (unsureActive) {
-        message = "Ik weet niet waar te beginnen — adviseer het Volledige Systeem.";
-      } else {
-        const parts = Object.keys(selected).map((p) => {
-          const subs = Array.from(selected[p]).map((s) => SUB_LABELS[p][s]).join(", ");
-          return PILLAR_LABELS[p] + " (" + subs + ")";
-        });
-        message = "Ik ben geïnteresseerd in: " + parts.join("; ");
-      }
-      const ctaMessage = document.getElementById("cta-message");
-      if (ctaMessage) {
-        ctaMessage.value = message;
-      }
-      const contactSection = document.getElementById("contact-cta");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  }
 </script>
 </body>
 </html>

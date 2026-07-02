@@ -50,7 +50,7 @@
           </div>
         </div>
       </li>
-      <li><a href="../#offer">Ons Aanbod</a></li>
+      <li><a href="../bouw-uw-marketing/">Ons Aanbod</a></li>
       <li><a href="../../blog/">Blog</a></li>
       <li><a href="../#proof">Ons werk</a></li>
       <li><a href="../contact/">Contact</a></li>
@@ -227,6 +227,13 @@
 
 <script src="../../script.js"></script>
 <script>
+  const prefillMessage = sessionStorage.getItem("foundPrefillMessage");
+  if (prefillMessage) {
+    const messageField = document.getElementById("message");
+    if (messageField) messageField.value = prefillMessage;
+    sessionStorage.removeItem("foundPrefillMessage");
+  }
+
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", (e) => {
