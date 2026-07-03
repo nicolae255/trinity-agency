@@ -83,28 +83,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="breadcrumb"><a href="../">Home</a> / Build Your Marketing</p>
       <p class="eyebrow">Our Offer</p>
       <h1>Tell us what you need. We'll show you how we'd help.</h1>
-      <p class="lead">No jargon required. Describe your situation in your own words, or pick from the list below — either way, you'll see exactly which services fit and roughly how big the job is.</p>
-    </div>
-  </section>
-
-  <section id="freetext-tool">
-    <div class="container">
-      <div class="simulator glass reveal" style="max-width: 100%;">
-        <h3>Describe what you need</h3>
-        <p class="simulator-intro">Write a sentence or two about your business and what's not working — for example, "not enough people find us on Google" or "we get visitors but nobody buys."</p>
-        <div class="form-group">
-          <textarea id="freeTextInput" rows="3" placeholder="e.g. We have a website but nobody seems to find us, and I don't really know where to start with ads."></textarea>
-        </div>
-        <button type="button" class="btn btn-primary" id="freeTextSubmit">Show me what fits &rarr;</button>
-        <p class="simulator-note" id="freeTextNote"></p>
-      </div>
+      <p class="lead">No jargon required. Pick from the list below — you'll see exactly which services fit and roughly how big the job is.</p>
     </div>
   </section>
 
   <section id="picker-tool">
     <div class="container">
       <div class="section-header left reveal">
-        <p class="eyebrow">Or Pick From The List</p>
+        <p class="eyebrow">Our Services</p>
         <h2>Every option, explained in plain terms</h2>
         <p>Not sure what something means? Each option below tells you what it actually does for your business — no marketing jargon.</p>
       </div>
@@ -342,44 +328,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     webpresence: { design: "Website Design & Dev", cro: "CRO", ecommerce: "E-commerce", landing: "Campaign Landing Pages", speed: "Site Speed & Analytics" },
   };
 
-  const KEYWORDS = {
-    "organic.seo": ["seo", "google search", "search engine", "rank on google", "show up on google", "found on google", "visibility"],
-    "organic.content": ["blog", "content", "articles", "write", "writing"],
-    "organic.social": ["social media", "instagram post", "facebook post", "linkedin post", "organic social", "post regularly"],
-    "organic.gbp": ["google maps", "google business", "local search", "near me", "google my business"],
-    "organic.email": ["newsletter", "email list", "nurture", "email marketing"],
-    "paid.social": ["facebook ads", "instagram ads", "tiktok ads", "social ads", "paid social", "boost post"],
-    "paid.search": ["google ads", "ppc", "search ads", "adwords", "paid search"],
-    "paid.retargeting": ["retarget", "remarketing", "people who visited", "abandoned"],
-    "paid.display": ["banner", "display ads", "programmatic"],
-    "paid.video": ["youtube ads", "video ads", "video advertising"],
-    "leadgen.outbound": ["cold email", "outreach", "linkedin message", "prospecting", "cold call"],
-    "leadgen.funnels": ["funnel", "landing page", "convert leads", "turn visitors into leads"],
-    "leadgen.crm": ["crm", "lead scoring", "sales pipeline", "track leads"],
-    "leadgen.magnets": ["free guide", "lead magnet", "ebook", "download", "gated content"],
-    "leadgen.automation": ["automation", "follow up", "automatic email", "nurture sequence"],
-    "webpresence.design": ["new website", "build a website", "website design", "web design", "don't have a website", "old website"],
-    "webpresence.cro": ["conversion", "visitors but nobody buys", "improve website", "nobody buys", "low conversion"],
-    "webpresence.ecommerce": ["online shop", "online store", "sell online", "ecommerce", "e-commerce", "webshop"],
-    "webpresence.landing": ["landing page for", "campaign page", "specific offer"],
-    "webpresence.speed": ["slow website", "site speed", "site is slow", "loading", "analytics", "tracking"],
-  };
-
-  const UNSURE_PHRASES = ["not sure", "don't know", "dont know", "no idea", "everything", "all of it", "where to start", "help me", "find new customers", "find customers", "more customers", "get customers", "no customers", "not enough customers", "need customers", "grow my business", "grow the business", "increase sales", "more sales", "more clients", "find clients", "get clients", "no clients", "not enough clients", "need clients", "more leads", "not enough leads", "no leads"];
-
   const simResults = document.getElementById("simResults");
   const simCta = document.getElementById("simCta");
   const simUnsure = document.getElementById("simUnsure");
   const simGroups = document.getElementById("simGroups");
   const selected = {};
   let unsureActive = false;
-
-  function selectChip(pillar, sub) {
-    if (!selected[pillar]) selected[pillar] = new Set();
-    selected[pillar].add(sub);
-    const chip = simGroups.querySelector('[data-pillar="' + pillar + '"][data-sub="' + sub + '"]');
-    if (chip) chip.classList.add("is-active");
-  }
 
   function clearSelection() {
     Object.keys(selected).forEach((p) => delete selected[p]);
@@ -410,47 +364,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     simUnsure.classList.toggle("is-active", unsureActive);
     if (unsureActive) clearSelection();
     renderSimResults();
-  });
-
-  document.getElementById("freeTextSubmit").addEventListener("click", () => {
-    const text = document.getElementById("freeTextInput").value.toLowerCase().trim();
-    const note = document.getElementById("freeTextNote");
-    if (!text) {
-      note.textContent = "Type a sentence above and we'll match it to what we offer.";
-      return;
-    }
-
-    unsureActive = false;
-    simUnsure.classList.remove("is-active");
-    clearSelection();
-
-    const isUnsure = UNSURE_PHRASES.some((phrase) => text.includes(phrase));
-    if (isUnsure) {
-      unsureActive = true;
-      simUnsure.classList.add("is-active");
-      note.textContent = "Got it — that sounds like the Full System. See the recommendation below.";
-      renderSimResults();
-      document.getElementById("picker-tool").scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-
-    let matchCount = 0;
-    Object.keys(KEYWORDS).forEach((key) => {
-      const matched = KEYWORDS[key].some((kw) => text.includes(kw));
-      if (matched) {
-        const [pillar, sub] = key.split(".");
-        selectChip(pillar, sub);
-        matchCount++;
-      }
-    });
-
-    if (matchCount === 0) {
-      note.textContent = "We couldn't quite match that to something specific — try picking from the list below instead, or use a few different words.";
-    } else {
-      note.textContent = "Based on what you wrote, we've highlighted " + matchCount + " thing" + (matchCount > 1 ? "s" : "") + " below. Feel free to adjust.";
-      renderSimResults();
-    }
-    document.getElementById("picker-tool").scrollIntoView({ behavior: "smooth" });
   });
 
   function tierMarkup(tier, name) {

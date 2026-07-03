@@ -800,14 +800,10 @@ body.cursor-ready .cursor-dot {
   z-index: 1;
 }
 
-#freetext-tool {
+#picker-tool {
   padding-top: 0;
   padding-bottom: 2.5rem;
   margin-top: -5rem;
-}
-
-#picker-tool {
-  padding-top: 2.5rem;
 }
 
 #compare-section {
