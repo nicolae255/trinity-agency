@@ -21,8 +21,12 @@ function initNodeCanvas(canvas, { color = "214,255,74", count = 30 } = {}) {
   let width, height, nodes, rafId = null, isVisible = false;
 
   function resize() {
-    width = canvas.width = canvas.offsetWidth * dpr;
-    height = canvas.height = canvas.offsetHeight * dpr;
+    const newWidth = canvas.offsetWidth * dpr;
+    const newHeight = canvas.offsetHeight * dpr;
+    if (newWidth === width && newHeight === height) return;
+    width = canvas.width = newWidth;
+    height = canvas.height = newHeight;
+    if (width > 0 && height > 0) makeNodes();
   }
 
   function makeNodes() {
@@ -83,7 +87,6 @@ function initNodeCanvas(canvas, { color = "214,255,74", count = 30 } = {}) {
   }
 
   resize();
-  makeNodes();
   window.addEventListener("resize", resize);
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) pause();
@@ -98,6 +101,15 @@ function initNodeCanvas(canvas, { color = "214,255,74", count = 30 } = {}) {
     },
     { threshold: 0.1 }
   ).observe(canvas);
+
+  // Manual refresh for canvases that were hidden (display:none) when the observer
+  // first ran — e.g. inside an inactive tab panel. Called explicitly on tab switch
+  // rather than relying on the observer to notice a display-toggle-driven reflow.
+  canvas._nodeCanvasRefresh = () => {
+    resize();
+    isVisible = true;
+    play();
+  };
 }
 
 document.querySelectorAll(".node-canvas").forEach((canvas) => {
@@ -141,6 +153,14 @@ pillarTabs.forEach((tab) => {
     const target = tab.dataset.target;
     pillarPanels.forEach((panel) => {
       panel.classList.toggle("is-active", panel.dataset.panel === target);
+    });
+
+    // Newly-visible canvases were sized while hidden (0x0) and their IntersectionObserver
+    // may not re-fire on a display-toggle reflow — refresh them directly instead.
+    requestAnimationFrame(() => {
+      const activePanel = document.querySelector('.pillar-panel.is-active');
+      const canvas = activePanel && activePanel.querySelector('.node-canvas');
+      if (canvas && canvas._nodeCanvasRefresh) canvas._nodeCanvasRefresh();
     });
   });
 });
