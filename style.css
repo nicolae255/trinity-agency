@@ -810,6 +810,12 @@ body.cursor-ready .cursor-dot {
   padding-top: 2.5rem;
 }
 
+#compare-section {
+  padding-top: 0;
+  padding-bottom: 2.5rem;
+  margin-top: -5rem;
+}
+
 .page-hero h1 {
   margin-bottom: 1.5rem;
 }
