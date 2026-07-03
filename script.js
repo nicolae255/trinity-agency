@@ -123,6 +123,28 @@ const storyObserver = new IntersectionObserver(
 
 storySections.forEach((el) => storyObserver.observe(el));
 
+// Pillar tabs (homepage "Your System" widget)
+const pillarTabs = document.querySelectorAll(".pillar-tab");
+const pillarPanels = document.querySelectorAll(".pillar-panel");
+
+pillarTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    if (tab.classList.contains("is-active")) return;
+
+    pillarTabs.forEach((t) => {
+      t.classList.remove("is-active");
+      t.setAttribute("aria-selected", "false");
+    });
+    tab.classList.add("is-active");
+    tab.setAttribute("aria-selected", "true");
+
+    const target = tab.dataset.target;
+    pillarPanels.forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.panel === target);
+    });
+  });
+});
+
 // Scroll progress rail
 const progressFill = document.querySelector(".progress-rail-fill");
 
