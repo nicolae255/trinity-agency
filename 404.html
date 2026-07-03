@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Consent Mode default (must load before GTM/GA) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -152,10 +163,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Found. All rights reserved.</span>
-    </div>
+    <span class="footer-bottom-sep"> &middot; </span><button type="button" class="cookie-prefs-link">Cookie Preferences</button></div>
   </div>
 </footer>
 
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner-inner">
+    <p>We use cookies to understand how visitors use this site. You can accept or decline analytics cookies anytime.</p>
+    <div class="cookie-banner-actions">
+      <a href="/privacy/" class="cookie-banner-link">Cookie Policy</a>
+      <button type="button" class="btn btn-ghost" id="cookieDecline">Decline</button>
+      <button type="button" class="btn btn-primary" id="cookieAccept">Accept</button>
+    </div>
+  </div>
+</div>
 <script src="/script.js"></script>
 
 </body>
