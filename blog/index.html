@@ -131,14 +131,6 @@
     </div>
   </section>
 
-  <section class="cta">
-    <div class="container cta-band glass reveal">
-      <p class="eyebrow" style="justify-content: center;">Let's Work Together</p>
-      <h2>Ready to put this into practice?</h2>
-      <p>Tell us about your business and where you're stuck — we'll show you exactly where the opportunity is.</p>
-      <a href="../contact/" class="btn btn-primary">Start the conversation</a>
-    </div>
-  </section>
 
 </main>
 
@@ -148,6 +140,17 @@
       <div class="footer-brand">
         <a href="../" class="logo">Found<span>.</span></a>
         <p>A marketing agency built around four things that actually move the needle: organic growth, promotion, prospecting, and building.</p>
+        <div class="footer-newsletter">
+          <h4>Newsletter</h4>
+          <form class="newsletter-form">
+            <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+            <input type="hidden" name="subject" value="New newsletter signup from foundagency.be footer">
+            <input type="hidden" name="from_name" value="Found Footer">
+            <input type="email" name="email" placeholder="you@company.com" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <p class="newsletter-note" data-success="You're on the list — thanks for subscribing." data-error="Something went wrong. Please try again."></p>
+        </div>
               <div class="footer-social">
           <a href="https://www.instagram.com/foundagencyy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -246,32 +249,6 @@
     });
   }
 
-  const newsletterForm = document.getElementById("newsletterForm");
-  if (newsletterForm) {
-    const note = document.getElementById("newsletterNote");
-    newsletterForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const btn = newsletterForm.querySelector("button");
-      btn.disabled = true;
-      btn.textContent = "Subscribing...";
-      try {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: new FormData(newsletterForm),
-        });
-        const data = await res.json();
-        if (!res.ok || !data.success) throw new Error("Request failed");
-        newsletterForm.reset();
-        note.textContent = "You're on the list — thanks for subscribing.";
-      } catch (err) {
-        note.textContent = "Something went wrong. Please try again.";
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "Subscribe";
-      }
-    });
-  }
 </script>
 
 </body>

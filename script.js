@@ -335,3 +335,35 @@ if (window.matchMedia("(hover: hover)").matches) {
   });
 }
 
+// Newsletter forms (blog band + footer, any page)
+document.querySelectorAll(".newsletter-form").forEach((form) => {
+  const note =
+    form.nextElementSibling && form.nextElementSibling.classList.contains("newsletter-note")
+      ? form.nextElementSibling
+      : null;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector("button");
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "...";
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error("Request failed");
+      form.reset();
+      if (note) note.textContent = note.dataset.success || "You're on the list — thanks for subscribing.";
+    } catch (err) {
+      if (note) note.textContent = note.dataset.error || "Something went wrong. Please try again.";
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+});
+
