@@ -803,6 +803,7 @@ body.cursor-ready .cursor-dot {
 #freetext-tool {
   padding-top: 0;
   padding-bottom: 2.5rem;
+  margin-top: -5rem;
 }
 
 #picker-tool {
