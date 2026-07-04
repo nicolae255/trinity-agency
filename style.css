@@ -774,8 +774,8 @@ body.cursor-ready .cursor-dot {
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding-top: 8.5rem;
-  padding-bottom: 4.5rem;
+  padding-top: 6.5rem;
+  padding-bottom: 2.5rem;
   background:
     radial-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px) 0 0/26px 26px,
     var(--bg);
