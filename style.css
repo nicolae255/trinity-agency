@@ -891,12 +891,6 @@ body.cursor-ready .cursor-dot {
 }
 
 /* ===== Contact form ===== */
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
 
 .form-card {
   padding: 2.25rem;
@@ -1060,29 +1054,43 @@ body.cursor-ready .cursor-dot {
   font-weight: 800;
 }
 
-.process-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.process-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.process-flow::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: calc(16.666% + 20px);
+  right: calc(16.666% + 20px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--emerald), var(--border), var(--emerald));
+  opacity: 0.35;
+  z-index: 0;
 }
 
 .process-step {
-  padding: 1.4rem 1.5rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 1.1rem;
+  position: relative;
+  z-index: 1;
+  padding: 1.75rem 1.5rem;
 }
 
 .process-step-num {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1.1rem;
   border-radius: 50%;
-  background: rgba(52, 211, 153, 0.12);
+  background: var(--bg);
+  border: 2px solid var(--emerald);
   color: var(--emerald);
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1090,14 +1098,29 @@ body.cursor-ready .cursor-dot {
 
 .process-step strong {
   display: block;
-  font-size: 0.98rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.02rem;
+  margin-bottom: 0.5rem;
 }
 
 .process-step p {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--muted);
   margin: 0;
+}
+
+.process-email {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--faint);
+}
+
+.process-email a {
+  color: var(--emerald);
+  text-decoration: underline;
+}
+
+#contact-form-final {
+  padding-top: 0;
 }
 
 /* ===== Story nav (persistent, with real links) ===== */
@@ -2256,6 +2279,14 @@ body.cursor-ready .cursor-dot {
 }
 
 @media (max-width: 700px) {
+  .process-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .process-flow::before {
+    display: none;
+  }
+
   .pillar-panel {
     padding: 2rem 1.5rem;
     min-height: auto;
