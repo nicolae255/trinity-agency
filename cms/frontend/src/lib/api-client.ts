@@ -64,9 +64,6 @@ apiClient.interceptors.response.use(
       // Avoid retrying the refresh endpoint itself to prevent infinite loops
       if (originalRequest.url?.includes("/auth/refresh")) {
         clearAccessToken();
-        if (typeof window !== "undefined") {
-          window.location.href = "/login";
-        }
         return Promise.reject(error);
       }
 
@@ -108,7 +105,8 @@ apiClient.interceptors.response.use(
         refreshSubscribers = [];
         clearAccessToken();
 
-        if (typeof window !== "undefined") {
+        // Only redirect if not already on an auth page
+        if (typeof window !== "undefined" && !window.location.pathname.startsWith("/login") && !window.location.pathname.startsWith("/forgot-password") && !window.location.pathname.startsWith("/reset-password")) {
           window.location.href = "/login";
         }
 

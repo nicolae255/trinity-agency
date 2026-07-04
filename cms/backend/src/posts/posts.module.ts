@@ -2,14 +2,10 @@ import { Module } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
 import { PrismaModule } from '../prisma/prisma.module';
-import { ScheduleModule } from '@nestjs/schedule';
+import { PublisherModule } from '../publisher/publisher.module';
 
 @Module({
-  imports: [
-    PrismaModule,
-    // ScheduleModule must be registered in AppModule; importing here for clarity.
-    // If already imported globally in AppModule, this import is optional.
-  ],
+  imports: [PrismaModule, PublisherModule],
   controllers: [PostsController],
   providers: [PostsService],
   exports: [PostsService],

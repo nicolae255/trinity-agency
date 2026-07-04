@@ -1,0 +1,282 @@
+interface BlogCard {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  categorySlug: string;
+  date: string;
+  readTime: string;
+  thumbLabel: string;
+}
+
+export function renderBlogIndexHtml(posts: BlogCard[]): string {
+  const cards = posts
+    .map(
+      (post) => `
+        <a href="${post.slug}/" class="blog-card reveal" data-category="${post.categorySlug}">
+          <div class="blog-thumb"><span>${post.thumbLabel}</span></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">${post.category}</span>
+            <h3>${post.title}</h3>
+            <p>${post.excerpt}</p>
+            <span class="blog-meta">${post.date} &middot; ${post.readTime}</span>
+          </div>
+        </a>`,
+    )
+    .join('\n');
+
+  // Collect unique categories for filter buttons
+  const categories = [...new Set(posts.map((p) => p.category))];
+  const filterButtons = categories
+    .map(
+      (cat) => {
+        const slug = posts.find((p) => p.category === cat)?.categorySlug || cat.toLowerCase();
+        return `        <button type="button" class="blog-filter" data-filter="${slug}">${cat}</button>`;
+      },
+    )
+    .join('\n');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode default (must load before GTM/GA) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PMLQ2G3L');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKNJ0L3N8X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PKNJ0L3N8X');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Marketing Insights | Found</title>
+<meta name="description" content="Practical, no-fluff marketing writing from a digital marketing agency in Brussels — SEO, paid advertising, and lead generation.">
+<link rel="canonical" href="https://foundagency.be/blog/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Marketing Insights | Found">
+<meta property="og:description" content="Practical, no-fluff writing on SEO, paid advertising, and prospecting.">
+<meta property="og:url" content="https://foundagency.be/blog/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:image" content="https://foundagency.be/og-image.png">
+<meta name="twitter:image" content="https://foundagency.be/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMLQ2G3L"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="cursor-dot"></div>
+<div class="page-transition"></div>
+
+<header class="story-nav">
+  <a href="../" class="logo">Found<span>.</span></a>
+  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+  <nav>
+    <ul>
+      <li><a href="../build-your-marketing/">Our Offer</a></li>
+      <li><a href="../#proof">Impact</a></li>
+      <li><a href="../contact/" class="btn btn-primary" style="padding: 0.6rem 1.4rem;">Build my system</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero" style="padding-bottom: 1rem;">
+    <div class="container">
+      <p class="breadcrumb"><a href="../">Home</a> / Blog</p>
+      <p class="eyebrow">Insights</p>
+      <h1>Marketing, explained without the fluff.</h1>
+      <p class="lead" style="margin-bottom: 0;">Practical writing on SEO, paid advertising, and prospecting — the stuff we actually use with clients, not recycled listicles.</p>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <div class="blog-filters" id="blogFilters">
+        <button type="button" class="blog-filter is-active" data-filter="all">All</button>
+${filterButtons}
+      </div>
+
+      <div class="blog-grid" id="blogGrid">
+${cards}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="newsletter-band glass reveal">
+        <h2>Get our marketing emails</h2>
+        <p>New posts, no fluff, straight to your inbox. Unsubscribe anytime.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+          <input type="hidden" name="subject" value="New newsletter signup from foundagency.be/blog">
+          <input type="hidden" name="from_name" value="Found Blog">
+          <input type="email" name="email" placeholder="you@company.com" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="newsletter-note" id="newsletterNote"></p>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../" class="logo">Found<span>.</span></a>
+        <p>A marketing agency built around four things that actually move the needle: organic growth, promotion, prospecting, and building.</p>
+              <div class="footer-social">
+          <a href="https://www.instagram.com/foundagencyy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/foundagencyy/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-newsletter">
+          <h4>Newsletter</h4>
+          <form class="newsletter-form">
+            <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+            <input type="hidden" name="subject" value="New newsletter signup from foundagency.be footer">
+            <input type="hidden" name="from_name" value="Found Footer">
+            <input type="email" name="email" placeholder="you@company.com" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <p class="newsletter-note" data-success="You're on the list — thanks for subscribing." data-error="Something went wrong. Please try again."></p>
+        </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Marketing Ways</h4>
+          <ul>
+            <li><a href="../organic-growth/">Organic Growth</a></li>
+            <li><a href="../paid-growth/">Paid Growth</a></li>
+            <li><a href="../lead-generation/">Lead Generation</a></li>
+            <li><a href="../web-presence/">Web Presence</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../blog/">Blog</a></li>
+            <li><a href="../#proof">Impact</a></li>
+            <li><a href="../#system">How We Work</a></li>
+            <li><a href="../contact/">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; ${new Date().getFullYear()} Found. All rights reserved.</span>
+    <span class="footer-bottom-sep"> &middot; </span><button type="button" class="cookie-prefs-link">Cookie Preferences</button></div>
+  </div>
+</footer>
+
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-teaser" id="chatTeaser">
+    <button class="chat-teaser-close" id="chatTeaserClose" aria-label="Dismiss">&times;</button>
+    <p>Hi! What can we help you with?</p>
+  </div>
+  <div class="chat-panel">
+    <div class="chat-panel-header">
+      <div>
+        <strong>Chat with Found</strong>
+        <span>We usually reply within 24 hours</span>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chat-panel-body">
+      <form id="chatForm">
+        <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+        <input type="hidden" name="subject" value="New chat inquiry from foundagency.be">
+        <input type="hidden" name="from_name" value="Found Chat Widget">
+        <div class="chat-step" data-step="1">
+          <div class="chat-bubble">Hi! What's the best email to reach you at?</div>
+          <div class="form-group">
+            <input type="email" id="chatEmail" name="email" placeholder="you@company.com" required>
+          </div>
+          <button type="button" class="btn btn-primary chat-next">Next</button>
+        </div>
+        <div class="chat-step" data-step="2" hidden>
+          <div class="chat-bubble">Great — what can we help with?</div>
+          <div class="form-group">
+            <textarea id="chatMessage" name="message" placeholder="Tell us about your business and goals..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+          <p class="chat-error" id="chatError"></p>
+        </div>
+        <div class="chat-step" data-step="done" hidden>
+          <div class="chat-bubble">Thanks — we've got it. We'll be in touch within 24 hours.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chatToggle" aria-label="Open chat">
+    <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </button>
+</div>
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner-inner">
+    <p>We use cookies to understand how visitors use this site. You can accept or decline analytics cookies anytime.</p>
+    <div class="cookie-banner-actions">
+      <a href="../privacy/" class="cookie-banner-link">Cookie Policy</a>
+      <button type="button" class="btn btn-ghost" id="cookieDecline">Decline</button>
+      <button type="button" class="btn btn-primary" id="cookieAccept">Accept</button>
+    </div>
+  </div>
+</div>
+<script src="../script.js"></script>
+<script>
+  const blogFilters = document.getElementById("blogFilters");
+  if (blogFilters) {
+    const cards = document.querySelectorAll("#blogGrid .blog-card");
+    blogFilters.addEventListener("click", (e) => {
+      const btn = e.target.closest(".blog-filter");
+      if (!btn) return;
+      blogFilters.querySelectorAll(".blog-filter").forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      const filter = btn.dataset.filter;
+      cards.forEach((card) => {
+        const show = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("is-hidden", !show);
+      });
+    });
+  }
+
+</script>
+
+</body>
+</html>
+`;
+}

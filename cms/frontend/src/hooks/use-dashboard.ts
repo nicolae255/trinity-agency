@@ -1,8 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
-import type { ApiResponse } from "@/types/api";
 import type { ActivityLog } from "@/types/activity-log";
 
+// Shape returned by backend
+interface BackendStats {
+  pages: number;
+  publishedPages: number;
+  posts: number;
+  publishedPosts: number;
+  draftPosts: number;
+  media: number;
+  users: number;
+}
+
+// Shape the frontend dashboard expects
 export interface DashboardStats {
   content: {
     totalPosts: number;
@@ -15,14 +26,13 @@ export interface DashboardStats {
   };
   media: {
     totalFiles: number;
-    totalSize: number; // in bytes
+    totalSize: number;
     imagesCount: number;
   };
   users: {
     totalUsers: number;
     activeUsersThisMonth: number;
   };
-  recentActivity: ActivityLog[];
 }
 
 export interface RecentActivity {
@@ -40,13 +50,34 @@ export function useDashboardStats() {
   return useQuery({
     queryKey: dashboardKeys.stats(),
     queryFn: async () => {
-      const response = await apiClient.get<ApiResponse<DashboardStats>>(
+      const response = await apiClient.get<{ data: BackendStats }>(
         "/dashboard/stats"
       );
-      return response.data.data;
+      const raw = response.data.data;
+      const mapped: DashboardStats = {
+        content: {
+          totalPosts: raw.posts,
+          publishedPosts: raw.publishedPosts,
+          draftPosts: raw.draftPosts,
+          scheduledPosts: 0,
+          totalPages: raw.pages,
+          publishedPages: raw.publishedPages,
+          draftPages: raw.pages - raw.publishedPages,
+        },
+        media: {
+          totalFiles: raw.media,
+          totalSize: 0,
+          imagesCount: 0,
+        },
+        users: {
+          totalUsers: raw.users,
+          activeUsersThisMonth: 0,
+        },
+      };
+      return mapped;
     },
-    staleTime: 2 * 60 * 1000, // 2 minutes - dashboard stats can be slightly stale
-    refetchInterval: 5 * 60 * 1000, // auto-refresh every 5 minutes
+    staleTime: 2 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
   });
 }
 
@@ -54,13 +85,14 @@ export function useRecentActivity(limit = 10) {
   return useQuery({
     queryKey: [...dashboardKeys.recentActivity(), limit],
     queryFn: async () => {
-      const response = await apiClient.get<ApiResponse<RecentActivity>>(
+      const response = await apiClient.get<{ data: ActivityLog[] }>(
         "/dashboard/recent-activity",
         { params: { limit } }
       );
-      return response.data.data;
+      const logs = response.data.data ?? [];
+      return { logs, total: logs.length } as RecentActivity;
     },
-    staleTime: 60 * 1000, // 1 minute
-    refetchInterval: 2 * 60 * 1000, // auto-refresh every 2 minutes
+    staleTime: 60 * 1000,
+    refetchInterval: 2 * 60 * 1000,
   });
 }
