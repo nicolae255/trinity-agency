@@ -812,6 +812,20 @@ body.cursor-ready .cursor-dot {
   margin-top: -5rem;
 }
 
+.compare-bridge {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  color: var(--text);
+  margin-top: 2.5rem;
+}
+
+#contact-form-section {
+  padding-top: 0;
+  margin-top: -2.5rem;
+}
+
 .page-hero h1 {
   margin-bottom: 1.5rem;
 }
