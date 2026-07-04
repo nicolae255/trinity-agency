@@ -1,5 +1,21 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Bot protection — injects Web3Forms' honeypot checkbox into every form on
+// the page that submits through Web3Forms (newsletter, chat, contact). It's
+// hidden from real visitors via CSS; bots that auto-fill every field tend to
+// check it, and Web3Forms silently discards those submissions.
+document.querySelectorAll('form:has(input[name="access_key"])').forEach((form) => {
+  if (form.querySelector('input[name="botcheck"]')) return;
+  const honeypot = document.createElement("input");
+  honeypot.type = "checkbox";
+  honeypot.name = "botcheck";
+  honeypot.style.display = "none";
+  honeypot.setAttribute("aria-hidden", "true");
+  honeypot.tabIndex = -1;
+  honeypot.autocomplete = "off";
+  form.appendChild(honeypot);
+});
+
 // Custom cursor
 const cursorDot = document.querySelector(".cursor-dot");
 
