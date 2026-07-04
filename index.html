@@ -306,6 +306,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="story-headline reveal">Ready to become easier to find — and impossible to ignore?</h2>
 
       <form class="final-form reveal" id="story-contact-form">
+        <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+        <input type="hidden" name="subject" value="New inquiry from foundagency.be homepage">
+        <input type="hidden" name="from_name" value="Found Homepage">
         <div class="form-group">
           <input type="text" id="cta-name" name="name" placeholder="Name" required>
         </div>
@@ -317,6 +320,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <button type="submit" class="btn btn-primary" style="width: 100%;">Build my system</button>
       </form>
+      <p class="form-status" id="story-contact-form-status" data-success="Thanks &mdash; we&rsquo;ll be in touch within 24 hours." data-error="Something went wrong. Please try again or email us directly." aria-live="polite"></p>
     </div>
   </section>
 
@@ -431,22 +435,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 <script src="script.js"></script>
-<script>
-  const ctaForm = document.getElementById("story-contact-form");
-  if (ctaForm) {
-    ctaForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const data = new FormData(ctaForm);
-      const subject = encodeURIComponent("New inquiry from foundagency.be");
-      const body = encodeURIComponent(
-        "Name: " + data.get("name") +
-        "\nEmail: " + data.get("email") +
-        "\n\nMessage:\n" + data.get("message")
-      );
-      window.location.href = "mailto:nicolascojocari@yahoo.fr?subject=" + subject + "&body=" + body;
-    });
-  }
-
-</script>
 </body>
 </html>

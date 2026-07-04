@@ -469,6 +469,40 @@ document.querySelectorAll(".newsletter-form").forEach((form) => {
   });
 });
 
+// Main contact forms (Contact page + homepage embedded form) — submits via
+// Web3Forms instead of a mailto fallback (access_key lives in each form's
+// hidden field, delivers to nicolascojocari@yahoo.fr).
+document.querySelectorAll("#contact-form, #story-contact-form").forEach((form) => {
+  const status = form.nextElementSibling && form.nextElementSibling.classList.contains("form-status")
+    ? form.nextElementSibling
+    : null;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector("button[type=submit]");
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "...";
+    if (status) status.textContent = "";
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error("Request failed");
+      form.reset();
+      if (status) status.textContent = status.dataset.success || "Thanks — we'll be in touch soon.";
+    } catch (err) {
+      if (status) status.textContent = status.dataset.error || "Something went wrong. Please try again.";
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+});
+
 // CTA click tracking — pushes a labeled event to dataLayer for every button-styled
 // element clicked (nav, hero, pillar tabs, service pages, forms, cookie banner, chat).
 // GTM picks this up via a Custom Event trigger listening for "cta_click" and forwards

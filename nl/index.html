@@ -304,6 +304,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="story-headline reveal">Klaar om makkelijker vindbaar te worden — en onmogelijk te negeren?</h2>
 
       <form class="final-form reveal" id="story-contact-form">
+        <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
+        <input type="hidden" name="subject" value="Nieuwe aanvraag via foundagency.be - homepage (NL)">
+        <input type="hidden" name="from_name" value="Found Homepage NL">
         <div class="form-group">
           <input type="text" id="cta-name" name="name" placeholder="Naam" required>
         </div>
@@ -315,6 +318,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <button type="submit" class="btn btn-primary" style="width: 100%;">Bouw mijn systeem</button>
       </form>
+      <p class="form-status" id="story-contact-form-status" data-success="Bedankt &mdash; we nemen binnen 24 uur contact op." data-error="Er ging iets mis. Probeer opnieuw of e-mail ons rechtstreeks." aria-live="polite"></p>
     </div>
   </section>
 
@@ -429,22 +433,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 <script src="../script.js"></script>
-<script>
-  const ctaForm = document.getElementById("story-contact-form");
-  if (ctaForm) {
-    ctaForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const data = new FormData(ctaForm);
-      const subject = encodeURIComponent("Nieuwe aanvraag via foundagency.be");
-      const body = encodeURIComponent(
-        "Naam: " + data.get("name") +
-        "\nE-mail: " + data.get("email") +
-        "\n\nBericht:\n" + data.get("message")
-      );
-      window.location.href = "mailto:hello@foundagency.be?subject=" + subject + "&body=" + body;
-    });
-  }
-
-</script>
 </body>
 </html>
