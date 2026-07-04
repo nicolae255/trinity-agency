@@ -469,3 +469,39 @@ document.querySelectorAll(".newsletter-form").forEach((form) => {
   });
 });
 
+// CTA click tracking — pushes a labeled event to dataLayer for every button-styled
+// element clicked (nav, hero, pillar tabs, service pages, forms, cookie banner, chat).
+// GTM picks this up via a Custom Event trigger listening for "cta_click" and forwards
+// cta_label/cta_location/cta_href to GA4 as event parameters.
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-primary, .btn-ghost");
+  if (!btn) return;
+
+  const section = btn.closest("[id]");
+  let location = "unknown";
+  if (btn.closest("header")) {
+    location = "header_nav";
+  } else if (btn.closest("footer")) {
+    location = "footer";
+  } else if (btn.closest(".chat-widget")) {
+    location = "chat_widget";
+  } else if (btn.closest(".cookie-banner")) {
+    location = "cookie_banner";
+  } else if (section) {
+    location = section.id;
+  } else if (btn.closest(".page-hero")) {
+    location = "page_hero";
+  } else if (btn.closest(".cta-band")) {
+    location = "cta_band";
+  } else if (btn.closest(".contact-layout")) {
+    location = "contact_form_area";
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "cta_click",
+    cta_label: btn.textContent.trim(),
+    cta_location: location,
+    cta_href: btn.getAttribute("href") || null,
+  });
+});
