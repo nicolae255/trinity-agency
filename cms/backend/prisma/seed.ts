@@ -38,6 +38,29 @@ async function main(): Promise<void> {
   console.log(`Upserted Super Admin: ${admin.email} (id: ${admin.id})`);
 
   // -------------------------------------------------------------------------
+  // Stefan Kocevski - Admin
+  // -------------------------------------------------------------------------
+  const stefanEmail = 'kocevskistefan8@gmail.com';
+  const stefanPassword = await hashPassword('Trinity123');
+
+  const stefan = await prisma.user.upsert({
+    where: { email: stefanEmail },
+    update: {
+      password: stefanPassword,
+      role: Role.SUPER_ADMIN,
+    },
+    create: {
+      email: stefanEmail,
+      password: stefanPassword,
+      firstName: 'Stefan',
+      lastName: 'Kocevski',
+      role: Role.SUPER_ADMIN,
+    },
+  });
+
+  console.log(`Upserted user: ${stefan.email} (id: ${stefan.id})`);
+
+  // -------------------------------------------------------------------------
   // Sample Categories
   // -------------------------------------------------------------------------
   const categorySeed = [

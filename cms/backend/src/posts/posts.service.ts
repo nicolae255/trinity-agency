@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { PrismaService } from '../prisma/prisma.service';
+import { PublisherService } from '../publisher/publisher.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostQueryDto } from './dto/post-query.dto';
@@ -15,7 +16,10 @@ import { PaginatedResult } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly publisherService: PublisherService,
+  ) {}
 
   /**
    * Generates a unique slug for a post. Appends -1, -2, etc. on collision.
@@ -307,6 +311,11 @@ export class PostsService {
       throw new NotFoundException(`Post with id "${id}" not found`);
     }
 
+    // Remove from static site if it was published
+    if (post.status === ContentStatus.PUBLISHED) {
+      this.publisherService.unpublishPost(id).catch(() => {});
+    }
+
     await this.prisma.post.delete({ where: { id } });
   }
 
@@ -321,7 +330,7 @@ export class PostsService {
       throw new ForbiddenException('You can only publish your own posts');
     }
 
-    return this.prisma.post.update({
+    const updated = await this.prisma.post.update({
       where: { id },
       data: {
         status: ContentStatus.PUBLISHED,
@@ -330,6 +339,11 @@ export class PostsService {
       },
       include: this.postInclude,
     });
+
+    // Publish to static site
+    this.publisherService.publishPost(id).catch(() => {});
+
+    return updated;
   }
 
   async unpublish(id: string, user: JwtPayload): Promise<any> {
@@ -343,11 +357,16 @@ export class PostsService {
       throw new ForbiddenException('You can only unpublish your own posts');
     }
 
-    return this.prisma.post.update({
+    const updated = await this.prisma.post.update({
       where: { id },
       data: { status: ContentStatus.DRAFT },
       include: this.postInclude,
     });
+
+    // Remove from static site
+    this.publisherService.unpublishPost(id).catch(() => {});
+
+    return updated;
   }
 
   async schedule(
@@ -405,5 +424,10 @@ export class PostsService {
         scheduledAt: null,
       },
     });
+
+    // Publish each to the static site
+    for (const { id } of scheduledPosts) {
+      this.publisherService.publishPost(id).catch(() => {});
+    }
   }
 }

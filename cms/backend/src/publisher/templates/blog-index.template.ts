@@ -1,4 +1,42 @@
-<!DOCTYPE html>
+interface BlogCard {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  categorySlug: string;
+  date: string;
+  readTime: string;
+  thumbLabel: string;
+}
+
+export function renderBlogIndexHtml(posts: BlogCard[]): string {
+  const cards = posts
+    .map(
+      (post) => `
+        <a href="${post.slug}/" class="blog-card reveal" data-category="${post.categorySlug}">
+          <div class="blog-thumb"><span>${post.thumbLabel}</span></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">${post.category}</span>
+            <h3>${post.title}</h3>
+            <p>${post.excerpt}</p>
+            <span class="blog-meta">${post.date} &middot; ${post.readTime}</span>
+          </div>
+        </a>`,
+    )
+    .join('\n');
+
+  // Collect unique categories for filter buttons
+  const categories = [...new Set(posts.map((p) => p.category))];
+  const filterButtons = categories
+    .map(
+      (cat) => {
+        const slug = posts.find((p) => p.category === cat)?.categorySlug || cat.toLowerCase();
+        return `        <button type="button" class="blog-filter" data-filter="${slug}">${cat}</button>`;
+      },
+    )
+    .join('\n');
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Consent Mode default (must load before GTM/GA) -->
@@ -82,42 +120,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="blog-filters" id="blogFilters">
         <button type="button" class="blog-filter is-active" data-filter="all">All</button>
-        <button type="button" class="blog-filter" data-filter="organic">Organic</button>
-        <button type="button" class="blog-filter" data-filter="strategy">Strategy</button>
-        <button type="button" class="blog-filter" data-filter="prospecting">Prospecting</button>
+${filterButtons}
       </div>
 
       <div class="blog-grid" id="blogGrid">
-
-        <a href="seo-fundamentals-2026/" class="blog-card reveal" data-category="organic">
-          <div class="blog-thumb"><span>SEO fundamentals that actually</span></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Organic</span>
-            <h3>6 SEO Fundamentals Belgian Businesses Should Get Right in 2026</h3>
-            <p>SEO fundamentals that actually move rankings for Belgian businesses in 2026 — crawlability, search intent, and local citations, before backlinks.</p>
-            <span class="blog-meta">July 2026 &middot; 5 min read</span>
-          </div>
-        </a>
-
-        <a href="organic-vs-paid/" class="blog-card reveal" data-category="strategy">
-          <div class="blog-thumb"><span>Should you invest in SEO or pa</span></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Strategy</span>
-            <h3>Organic vs Paid: How to Know When to Turn On Ads</h3>
-            <p>Should you invest in SEO or paid ads first? A practical framework for Belgian businesses, including how competition differs by region.</p>
-            <span class="blog-meta">July 2026 &middot; 4 min read</span>
-          </div>
-        </a>
-
-        <a href="b2b-prospecting-mistakes/" class="blog-card reveal" data-category="prospecting">
-          <div class="blog-thumb"><span>The 6 most common B2B prospect</span></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Prospecting</span>
-            <h3>Why Most B2B Prospecting Fails (And How to Fix It)</h3>
-            <p>The 6 most common B2B prospecting mistakes we see, including the one language-related mistake that's specific to Belgium's multilingual market.</p>
-            <span class="blog-meta">July 2026 &middot; 4 min read</span>
-          </div>
-        </a>
+${cards}
       </div>
     </div>
   </section>
@@ -190,7 +197,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Found. All rights reserved.</span>
+      <span>&copy; ${new Date().getFullYear()} Found. All rights reserved.</span>
     <span class="footer-bottom-sep"> &middot; </span><button type="button" class="cookie-prefs-link">Cookie Preferences</button></div>
   </div>
 </footer>
@@ -271,3 +278,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </body>
 </html>
+`;
+}

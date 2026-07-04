@@ -1,4 +1,42 @@
-<!DOCTYPE html>
+interface PostTemplateData {
+  title: string;
+  metaDescription: string;
+  slug: string;
+  category: string;
+  categorySlug: string;
+  content: string;
+  date: string; // e.g. "July 2026"
+  readTime: string; // e.g. "5 min read"
+  ogTitle?: string;
+  ogDescription?: string;
+  faqSchema?: string; // JSON-LD string or empty
+  baseUrl: string;
+}
+
+export function renderPostHtml(data: PostTemplateData): string {
+  const {
+    title,
+    metaDescription,
+    slug,
+    category,
+    content,
+    date,
+    readTime,
+    ogTitle,
+    ogDescription,
+    faqSchema,
+    baseUrl,
+  } = data;
+
+  const canonicalUrl = `${baseUrl}/blog/${slug}/`;
+  const ogTitleFinal = ogTitle || title;
+  const ogDescFinal = ogDescription || metaDescription;
+
+  const faqBlock = faqSchema
+    ? `<script type="application/ld+json">\n${faqSchema}\n</script>\n`
+    : '';
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Consent Mode default (must load before GTM/GA) -->
@@ -30,21 +68,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Marketing Insights | Found</title>
-<meta name="description" content="Practical, no-fluff marketing writing from a digital marketing agency in Brussels — SEO, paid advertising, and lead generation.">
-<link rel="canonical" href="https://foundagency.be/blog/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog — Marketing Insights | Found">
-<meta property="og:description" content="Practical, no-fluff writing on SEO, paid advertising, and prospecting.">
-<meta property="og:url" content="https://foundagency.be/blog/">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<meta property="og:image" content="https://foundagency.be/og-image.png">
-<meta name="twitter:image" content="https://foundagency.be/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>${title} | Found</title>
+<meta name="description" content="${metaDescription}">
+<link rel="canonical" href="${canonicalUrl}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="${ogTitleFinal}">
+<meta property="og:description" content="${ogDescFinal}">
+<meta property="og:url" content="${canonicalUrl}">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<meta property="og:image" content="${baseUrl}/og-image.png">
+<meta name="twitter:image" content="${baseUrl}/og-image.png">
+${faqBlock}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../../style.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -56,89 +94,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="page-transition"></div>
 
 <header class="story-nav">
-  <a href="../" class="logo">Found<span>.</span></a>
+  <a href="../../" class="logo">Found<span>.</span></a>
   <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
   <nav>
     <ul>
-      <li><a href="../build-your-marketing/">Our Offer</a></li>
-      <li><a href="../#proof">Impact</a></li>
-      <li><a href="../contact/" class="btn btn-primary" style="padding: 0.6rem 1.4rem;">Build my system</a></li>
+      <li><a href="../../build-your-marketing/">Our Offer</a></li>
+      <li><a href="../../#proof">Impact</a></li>
+      <li><a href="../../contact/" class="btn btn-primary" style="padding: 0.6rem 1.4rem;">Build my system</a></li>
     </ul>
   </nav>
 </header>
 
 <main>
 
-  <section class="page-hero" style="padding-bottom: 1rem;">
+  <section class="page-hero">
     <div class="container">
-      <p class="breadcrumb"><a href="../">Home</a> / Blog</p>
-      <p class="eyebrow">Insights</p>
-      <h1>Marketing, explained without the fluff.</h1>
-      <p class="lead" style="margin-bottom: 0;">Practical writing on SEO, paid advertising, and prospecting — the stuff we actually use with clients, not recycled listicles.</p>
-    </div>
-  </section>
-
-  <section style="padding-top: 0;">
-    <div class="container">
-      <div class="blog-filters" id="blogFilters">
-        <button type="button" class="blog-filter is-active" data-filter="all">All</button>
-        <button type="button" class="blog-filter" data-filter="organic">Organic</button>
-        <button type="button" class="blog-filter" data-filter="strategy">Strategy</button>
-        <button type="button" class="blog-filter" data-filter="prospecting">Prospecting</button>
-      </div>
-
-      <div class="blog-grid" id="blogGrid">
-
-        <a href="seo-fundamentals-2026/" class="blog-card reveal" data-category="organic">
-          <div class="blog-thumb"><span>SEO fundamentals that actually</span></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Organic</span>
-            <h3>6 SEO Fundamentals Belgian Businesses Should Get Right in 2026</h3>
-            <p>SEO fundamentals that actually move rankings for Belgian businesses in 2026 — crawlability, search intent, and local citations, before backlinks.</p>
-            <span class="blog-meta">July 2026 &middot; 5 min read</span>
-          </div>
-        </a>
-
-        <a href="organic-vs-paid/" class="blog-card reveal" data-category="strategy">
-          <div class="blog-thumb"><span>Should you invest in SEO or pa</span></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Strategy</span>
-            <h3>Organic vs Paid: How to Know When to Turn On Ads</h3>
-            <p>Should you invest in SEO or paid ads first? A practical framework for Belgian businesses, including how competition differs by region.</p>
-            <span class="blog-meta">July 2026 &middot; 4 min read</span>
-          </div>
-        </a>
-
-        <a href="b2b-prospecting-mistakes/" class="blog-card reveal" data-category="prospecting">
-          <div class="blog-thumb"><span>The 6 most common B2B prospect</span></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Prospecting</span>
-            <h3>Why Most B2B Prospecting Fails (And How to Fix It)</h3>
-            <p>The 6 most common B2B prospecting mistakes we see, including the one language-related mistake that's specific to Belgium's multilingual market.</p>
-            <span class="blog-meta">July 2026 &middot; 4 min read</span>
-          </div>
-        </a>
+      <p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Blog</a> / ${title}</p>
+      <p class="eyebrow">${category}</p>
+      <h1>${title}</h1>
+      <div class="article-meta">
+        <span>Found</span>
+        <span class="dot"></span>
+        <span>${date}</span>
+        <span class="dot"></span>
+        <span>${readTime}</span>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="container">
-      <div class="newsletter-band glass reveal">
-        <h2>Get our marketing emails</h2>
-        <p>New posts, no fluff, straight to your inbox. Unsubscribe anytime.</p>
-        <form class="newsletter-form" id="newsletterForm">
-          <input type="hidden" name="access_key" value="1955c4fa-4f2c-468b-ba08-1b5aed26a6a2">
-          <input type="hidden" name="subject" value="New newsletter signup from foundagency.be/blog">
-          <input type="hidden" name="from_name" value="Found Blog">
-          <input type="email" name="email" placeholder="you@company.com" required>
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-        <p class="newsletter-note" id="newsletterNote"></p>
-      </div>
+    <div class="container article-body reveal">
+${content}
     </div>
   </section>
 
+  <section class="cta">
+    <div class="container cta-band glass reveal">
+      <p class="eyebrow" style="justify-content: center;">Let's Work Together</p>
+      <h2>Want this done for you?</h2>
+      <p>We handle end-to-end marketing strategy and execution.</p>
+      <a href="../../contact/" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
 
 </main>
 
@@ -146,9 +143,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="../" class="logo">Found<span>.</span></a>
+        <a href="../../" class="logo">Found<span>.</span></a>
         <p>A marketing agency built around four things that actually move the needle: organic growth, promotion, prospecting, and building.</p>
-              <div class="footer-social">
+        <div class="footer-social">
           <a href="https://www.instagram.com/foundagencyy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
@@ -172,25 +169,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="footer-col">
           <h4>Marketing Ways</h4>
           <ul>
-            <li><a href="../organic-growth/">Organic Growth</a></li>
-            <li><a href="../paid-growth/">Paid Growth</a></li>
-            <li><a href="../lead-generation/">Lead Generation</a></li>
-            <li><a href="../web-presence/">Web Presence</a></li>
+            <li><a href="../../organic-growth/">Organic Growth</a></li>
+            <li><a href="../../paid-growth/">Paid Growth</a></li>
+            <li><a href="../../lead-generation/">Lead Generation</a></li>
+            <li><a href="../../web-presence/">Web Presence</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="../blog/">Blog</a></li>
-            <li><a href="../#proof">Impact</a></li>
-            <li><a href="../#system">How We Work</a></li>
-            <li><a href="../contact/">Contact</a></li>
+            <li><a href="../../blog/">Blog</a></li>
+            <li><a href="../../#proof">Impact</a></li>
+            <li><a href="../../#system">How We Work</a></li>
+            <li><a href="../../contact/">Contact</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Found. All rights reserved.</span>
+      <span>&copy; ${new Date().getFullYear()} Found. All rights reserved.</span>
     <span class="footer-bottom-sep"> &middot; </span><button type="button" class="cookie-prefs-link">Cookie Preferences</button></div>
   </div>
 </footer>
@@ -243,31 +240,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="cookie-banner-inner">
     <p>We use cookies to understand how visitors use this site. You can accept or decline analytics cookies anytime.</p>
     <div class="cookie-banner-actions">
-      <a href="../privacy/" class="cookie-banner-link">Cookie Policy</a>
+      <a href="../../privacy/" class="cookie-banner-link">Cookie Policy</a>
       <button type="button" class="btn btn-ghost" id="cookieDecline">Decline</button>
       <button type="button" class="btn btn-primary" id="cookieAccept">Accept</button>
     </div>
   </div>
 </div>
-<script src="../script.js"></script>
-<script>
-  const blogFilters = document.getElementById("blogFilters");
-  if (blogFilters) {
-    const cards = document.querySelectorAll("#blogGrid .blog-card");
-    blogFilters.addEventListener("click", (e) => {
-      const btn = e.target.closest(".blog-filter");
-      if (!btn) return;
-      blogFilters.querySelectorAll(".blog-filter").forEach((b) => b.classList.remove("is-active"));
-      btn.classList.add("is-active");
-      const filter = btn.dataset.filter;
-      cards.forEach((card) => {
-        const show = filter === "all" || card.dataset.category === filter;
-        card.classList.toggle("is-hidden", !show);
-      });
-    });
-  }
-
-</script>
+<script src="../../script.js"></script>
 
 </body>
 </html>
+`;
+}
