@@ -994,10 +994,12 @@ body.cursor-ready .cursor-dot {
 .compare-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: stretch;
   gap: 1.5rem;
 }
 
 .compare-col {
+  box-sizing: border-box;
   border-radius: var(--radius-md);
   padding: 1.5rem 1.6rem;
 }
