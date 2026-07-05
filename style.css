@@ -891,6 +891,26 @@ body.cursor-ready .cursor-dot {
   vertical-align: middle;
 }
 
+/* Offline marketing: tighter vertical rhythm across a long stack of sections */
+#problem,
+#solution,
+#stats,
+#how-it-works,
+#services,
+#offline-faq {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+#problem .feature-grid,
+#services .feature-grid {
+  margin-top: 1.75rem;
+}
+
+#solution .compare-block {
+  margin-top: 0.5rem;
+}
+
 .region-note {
   margin-top: 2.5rem;
   padding: 1.5rem 1.75rem;
