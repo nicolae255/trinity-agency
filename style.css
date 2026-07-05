@@ -2848,3 +2848,200 @@ body.cursor-ready .cursor-dot {
     justify-content: flex-end;
   }
 }
+
+/* ===== Offline marketing: customer journey ===== */
+.journey-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.journey-step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.journey-step:nth-child(even) .journey-step-text { order: 2; }
+.journey-step:nth-child(even) .journey-step-visual { order: 1; }
+
+.journey-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1.1rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--emerald);
+  color: var(--emerald);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.journey-step-text h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+}
+
+.journey-step-text p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  max-width: 460px;
+}
+
+.journey-visual-card {
+  padding: 1.75rem;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-mini {
+  width: 100%;
+  max-width: 220px;
+}
+
+/* Flyer wireframe mockup */
+.flyer-mockup {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 3 / 4;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.flyer-mockup-image {
+  width: 100%;
+  height: 38%;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.22), rgba(52, 211, 153, 0.06));
+  margin-bottom: 0.3rem;
+}
+
+.flyer-mockup-line {
+  height: 9px;
+  border-radius: 5px;
+  background: var(--border-strong);
+  width: 100%;
+}
+
+.flyer-mockup-headline {
+  height: 14px;
+  width: 78%;
+  background: rgba(245, 246, 240, 0.28);
+}
+
+.flyer-mockup-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.flyer-mockup-qr {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: rgba(245, 246, 240, 0.16);
+  flex-shrink: 0;
+}
+
+.flyer-mockup-cta {
+  flex: 1;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--emerald);
+  opacity: 0.85;
+}
+
+/* QR + analytics mockup */
+.qr-visual {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  width: 100%;
+}
+
+.qr-code {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.qr-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  flex: 1;
+}
+
+.qr-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.qr-stat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--emerald);
+}
+
+.qr-stat-label {
+  font-size: 0.82rem;
+  color: var(--faint);
+}
+
+.qr-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 44px;
+  margin-top: 0.3rem;
+}
+
+.qr-bar-chart span {
+  width: 12px;
+  transform: scaleY(1);
+}
+
+/* Distribution route map mockup */
+.distribution-map {
+  width: 100%;
+  max-width: 280px;
+}
+
+@media (max-width: 800px) {
+  .journey-step,
+  .journey-step:nth-child(even) .journey-step-text,
+  .journey-step:nth-child(even) .journey-step-visual {
+    grid-template-columns: 1fr;
+    order: initial;
+  }
+
+  .journey-step {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .qr-visual {
+    flex-direction: column;
+    text-align: center;
+  }
+}
