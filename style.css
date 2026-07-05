@@ -866,6 +866,31 @@ body.cursor-ready .cursor-dot {
   margin-top: 2.5rem;
 }
 
+.feature-grid-3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cite {
+  font-size: 0.68em;
+  font-weight: 500;
+  color: var(--emerald);
+  text-decoration: none;
+  margin-left: 0.3em;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.cite:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.case-stat .cite {
+  display: inline-block;
+  margin-left: 0.4em;
+  vertical-align: middle;
+}
+
 .region-note {
   margin-top: 2.5rem;
   padding: 1.5rem 1.75rem;
@@ -2598,6 +2623,7 @@ body.cursor-ready .cursor-dot {
 @media (max-width: 900px) {
   .service-grid,
   .feature-grid,
+  .feature-grid-3col,
   .blog-grid {
     grid-template-columns: 1fr;
   }
