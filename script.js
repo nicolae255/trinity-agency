@@ -545,6 +545,8 @@ document.addEventListener("click", (e) => {
     location = "cta_band";
   } else if (btn.closest(".contact-layout")) {
     location = "contact_form_area";
+  } else if (btn.closest(".guide-card")) {
+    location = "guides_page";
   }
 
   window.dataLayer = window.dataLayer || [];
@@ -553,5 +555,54 @@ document.addEventListener("click", (e) => {
     cta_label: btn.textContent.trim(),
     cta_location: location,
     cta_href: btn.getAttribute("href") || null,
+  });
+});
+
+// Free guide download forms (/guides/) — gates each PDF behind a name/email
+// submitted via Web3Forms, then reveals the direct download link. Fires GA4's
+// recommended generate_lead and file_download events (mirrors the cta_click
+// setup above; GTM needs matching Custom Event triggers for these two names).
+document.querySelectorAll(".guide-form").forEach((form) => {
+  const gate = form.closest(".guide-gate");
+  const success = gate ? gate.querySelector(".guide-success") : null;
+  const status = form.querySelector(".guide-form-status");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "...";
+    if (status) status.textContent = "";
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error("Request failed");
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "generate_lead", form_id: form.dataset.guide });
+
+      form.hidden = true;
+      if (success) success.hidden = false;
+    } catch (err) {
+      if (status) status.textContent = "Something went wrong. Please try again.";
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+});
+
+document.querySelectorAll(".guide-download").forEach((link) => {
+  link.addEventListener("click", () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "file_download",
+      file_name: link.dataset.file,
+      link_url: link.getAttribute("href"),
+    });
   });
 });
