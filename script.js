@@ -558,43 +558,62 @@ document.addEventListener("click", (e) => {
   });
 });
 
-// Free guide download forms (/guides/) — gates each PDF behind a name/email
-// submitted via Web3Forms, then reveals the direct download link. Fires GA4's
-// recommended generate_lead and file_download events (mirrors the cta_click
-// setup above; GTM needs matching Custom Event triggers for these two names).
-document.querySelectorAll(".guide-form").forEach((form) => {
-  const gate = form.closest(".guide-gate");
-  const success = gate ? gate.querySelector(".guide-success") : null;
-  const status = form.querySelector(".guide-form-status");
-  const btn = form.querySelector("button[type=submit]");
-  const originalText = btn.textContent;
+// Free guide download forms (/guides/) — gates every PDF behind a single
+// name/email submission via Web3Forms. Once unlocked (this page load or a
+// past visit, remembered in localStorage), every guide on the page shows its
+// direct download link instead of the form, so returning visitors and anyone
+// unlocking a second guide in the same session never re-enter their details.
+// Fires GA4's recommended generate_lead and file_download events (mirrors the
+// cta_click setup above; GTM needs matching Custom Event triggers for both).
+(() => {
+  const UNLOCK_KEY = "found_guides_unlocked";
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    btn.disabled = true;
-    btn.textContent = "...";
-    if (status) status.textContent = "";
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error("Request failed");
+  const unlockCard = (form) => {
+    const gate = form.closest(".guide-gate");
+    const success = gate ? gate.querySelector(".guide-success") : null;
+    form.hidden = true;
+    if (success) success.hidden = false;
+  };
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "generate_lead", form_id: form.dataset.guide });
+  const forms = document.querySelectorAll(".guide-form");
 
-      form.hidden = true;
-      if (success) success.hidden = false;
-    } catch (err) {
-      if (status) status.textContent = "Something went wrong. Please try again.";
-      btn.disabled = false;
-      btn.textContent = originalText;
-    }
+  if (localStorage.getItem(UNLOCK_KEY) === "1") {
+    forms.forEach(unlockCard);
+    return;
+  }
+
+  forms.forEach((form) => {
+    const status = form.querySelector(".guide-form-status");
+    const btn = form.querySelector("button[type=submit]");
+    const originalText = btn.textContent;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = "...";
+      if (status) status.textContent = "";
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error("Request failed");
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "generate_lead", form_id: form.dataset.guide });
+
+        localStorage.setItem(UNLOCK_KEY, "1");
+        forms.forEach(unlockCard);
+      } catch (err) {
+        if (status) status.textContent = "Something went wrong. Please try again.";
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
   });
-});
+})();
 
 document.querySelectorAll(".guide-download").forEach((link) => {
   link.addEventListener("click", () => {
