@@ -1,0 +1,34 @@
+# Found
+
+> Found is a marketing agency in Belgium building complete customer acquisition systems: organic growth, paid growth, lead generation, and web presence. Based in Brussels, serving businesses across Belgium.
+
+Found does not sell isolated marketing services. It builds systems that combine SEO, AEO and GEO (being cited by AI search tools like ChatGPT, Gemini, and Google's AI Overview), paid advertising, lead generation, and web design into one coordinated engine for customer acquisition.
+
+## Primary pages
+
+- [Homepage](https://foundagency.be/): overview of the four-part system (organic growth, paid growth, lead generation, web presence).
+- [Our Offer](https://foundagency.be/build-your-marketing/): how the full system fits together and what it costs.
+- [Organic Growth](https://foundagency.be/organic-growth/): SEO, AEO, and GEO services, including how Found approaches being cited by AI answer engines.
+- [Paid Growth](https://foundagency.be/paid-growth/): Google, Meta, and LinkedIn advertising.
+- [Lead Generation](https://foundagency.be/lead-generation/): outbound prospecting and pipeline building.
+- [Web Presence](https://foundagency.be/web-presence/): website design and brand identity.
+- [Contact](https://foundagency.be/contact/): how to reach Found.
+
+## Guides
+
+- [Free Guides](https://foundagency.be/guides/): two free guides for business owners, one on GEO and AEO, one a general marketing handbook covering budget, channels, and team structure.
+
+## Case studies
+
+- [Diamant Consult](https://foundagency.be/case-studies/diamant-consult/): brand and website rebuild for a consulting firm.
+- [Notary Brussels](https://foundagency.be/case-studies/notary-brussels/): +200% online appointment requests for a notary office.
+- [Inside Zone](https://foundagency.be/case-studies/inside-zone/): case study on lead generation and growth.
+
+## Blog
+
+- [Blog index](https://foundagency.be/blog/): articles on SEO, AEO, GEO, paid vs organic strategy, and B2B prospecting.
+- [SEO, AEO, and GEO: How Engine Optimization Works in 2026](https://foundagency.be/blog/engine-optimization/): how the three disciplines differ and work together.
+
+## Languages
+
+This site is also published in French (https://foundagency.be/fr/) and Dutch (https://foundagency.be/nl/), same content, same structure.
