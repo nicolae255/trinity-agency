@@ -410,8 +410,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="form-group">
             <textarea id="chatMessage" name="message" placeholder="Tell us about your business and goals..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Send</button>
-          <p class="chat-error" id="chatError"></p>
+          <button type="submit" class="btn btn-primary" data-sending="Sending...">Send</button>
+          <p class="chat-error" id="chatError" data-error="Something went wrong. Please try again or email us directly."></p>
         </div>
         <div class="chat-step" data-step="done" hidden>
           <div class="chat-bubble">Thanks — we've got it. We'll be in touch within 24 hours.</div>

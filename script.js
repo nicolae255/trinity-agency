@@ -298,8 +298,9 @@ if (chatWidget) {
 
     chatError.classList.remove("is-visible");
     const submitBtn = steps[2].querySelector("button[type=submit]");
+    const originalText = submitBtn.textContent;
     submitBtn.disabled = true;
-    submitBtn.textContent = "Sending...";
+    submitBtn.textContent = submitBtn.dataset.sending || "Sending...";
 
     try {
       const res = await fetch(WEB3FORMS_ENDPOINT, {
@@ -314,10 +315,10 @@ if (chatWidget) {
       steps[2].hidden = true;
       steps.done.hidden = false;
     } catch (err) {
-      chatError.textContent = "Something went wrong — email us directly at hello@trinity-agency.com instead.";
+      chatError.textContent = chatError.dataset.error || "Something went wrong. Please try again or email us directly.";
       chatError.classList.add("is-visible");
       submitBtn.disabled = false;
-      submitBtn.textContent = "Send";
+      submitBtn.textContent = originalText;
     }
   });
 }
