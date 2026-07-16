@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /case-studies/acupuncture-brussels/preview/
 
 Sitemap: https://foundagency.be/sitemap.xml

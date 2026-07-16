@@ -1,0 +1,289 @@
+:root{
+  /* update css variables starts here */
+  /* Typography - Font Sizes */
+  --text-xxs: 10px;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 15px;
+  --text-xl: 16px;
+  --text-2xl: 18px;
+  --text-3xl: 20px;
+  --text-4xl: 22px;
+  --text-5xl: 24px;
+  --text-6xl: 25px;
+  --text-7xl: 30px;
+  --text-8xl: 35px;
+  --text-9xl: 40px;
+  --text-10xl: 60px;
+  --text-11xl: 74px;
+
+  /* Typography - Font Weight */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 25px;
+
+  /* line height */
+  --line-height-normal: 1.2em;
+  --line-height-medium: 1.4em;
+  --line-height-large: 1.6em;
+  /* update css variables ends here */
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --font-11: 11px;
+  --font-12: 12px;
+  --base-font-family: 'Inter', sans-serif;
+}
+
+:root,
+:root.light {
+  --font-13: 13px;
+  --font-14: 14px;
+  --font-15: 15px;
+  --font-16: 16px;
+  --font-18: 18px;
+  --font-20: 20px;
+  --font-22: 22px;
+  --font-25: 25px;
+  --font-30: 30px;
+  --font-35: 35px;
+  --font-40: 40px;
+  --font-50: 60px;
+  --font-60: 60px;
+  --font-74: 74px;
+
+
+  --body-color: #f6f6f6;
+  --title-color: #272727;
+  --label-color: #363636;
+  --color-white: #ffffff;
+  --subtitle-color: #636363;
+  --card-bg-color: #fff;
+  --card-header-border-color: #eee;
+
+  --input-text-color: var(--subtitle-color);
+  --input-bg-color: var(--card-bg-color);
+  --input-border-color: #ddd;
+
+  --border-color: #efefef;
+  --topsearchbar-header-bg-color: var(--card-bg-color);
+  --toptoolbar-header-bg-color: #2C2E43;
+
+  --tab-bg-color: #f2f2f2;
+  --tab-text-color: var(--subtitle-color);
+  --tab-hover-text-color: var(--title-color);
+  --tab-hover-color: var(--color-white);
+  --topsearchbar-header-bg-color: var(--color-white);
+  --thumbnail-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+  --button-bg-color: #e9e9e9;
+  --button-bg-hover-color: #e9e9e9;
+  --button-saving-bg-color: rgb(116, 127, 134);
+  --button-outline-bg-color: var(--card-bg-color);
+  --button-outline-hover-bg-color: #f6f6f6;
+  --pagebuilder-section-bg: var(--card-bg-color);
+
+  --text-inverse: #FFFFFF;
+
+  --action-primary: #2d2d2d;
+  --action-primary-hover: #434343;
+  --action-inverse-bg-color: #FFFFFF;
+  --action-inverse-text-color: var(--subtitle-color);
+  --action-tertiary: #F7F7F7;
+  --action-tertiary-hover: #E7E7E7;
+  --action-accent: #999999;
+  --action-accent-hover: #636363;
+  --border-default: #e2e5eb;
+
+  /* px-btn design tokens */
+  --px-btn-height-sm: 32px;
+  --px-btn-height-md: 36px;
+  --px-btn-height-lg: 42px;
+  --px-btn-default-bg: var(--card-bg-color);
+  --px-btn-default-text: var(--subtitle-color);
+  --px-btn-default-border: var(--border-default);
+  --px-btn-default-hover-bg: var(--button-outline-hover-bg-color);
+  --px-btn-solid-bg: var(--action-primary);
+  --px-btn-solid-text: var(--text-inverse);
+  --px-btn-solid-border: transparent;
+  --px-btn-solid-hover-bg: var(--action-primary-hover);
+  --px-btn-muted-bg: var(--action-tertiary);
+  --px-btn-muted-text: var(--subtitle-color);
+  --px-btn-muted-border: transparent;
+  --px-btn-muted-hover-bg: var(--action-tertiary-hover);
+  --px-btn-muted-hover-text: var(--title-color);
+  --px-btn-link-text: var(--blue-text-color);
+  --px-btn-link-hover-text: var(--hover-blue-text-color);
+  --px-btn-ghost-text: var(--subtitle-color);
+  --px-btn-ghost-hover-bg: var(--action-tertiary);
+
+  --bg-danger-color: #ff4a64;
+  --bg-danger-hover-color: rgba(255, 74, 100, 0.1);
+
+  --card-table-header-color: #f2f2f2;
+
+  --blue-text-color: #2F87FE;
+  --sidebar-border-color: var(--border-color);
+  --sidebar-blue-text-color: var(--blue-text-color);
+  --hover-blue-text-color: #0E60CF;
+
+  --studio-toggle-focus-ring: rgba(39, 39, 39, 0.15);
+
+  /* Studio Checkbox / Radio — light mode (Eyris) */
+  --studio-checkbox-size: 18px;
+  --studio-checkbox-border-color: #D1D5DB;
+  --studio-checkbox-bg: var(--card-bg-color);
+  --studio-checkbox-check-fill: #fff;
+  --studio-checkbox-checked-bg: var(--title-color);
+  --studio-checkbox-hover-border-color: var(--title-color);
+  --studio-radio-checked-fill: var(--title-color);
+  --studio-radio-checked-border: var(--title-color);
+  --studio-radio-checked-dot: var(--studio-checkbox-check-fill);
+  --studio-radio-checked-dot-size: 8px;
+
+  --help-link-color: #545454;
+  --help-link-hover-color: #000;
+
+  --scrollbar-track-bg-color: rgba(0,0,0, 0.05);
+  --scrollbar-track-scroll-bg-color: rgba(0,0,0, 0.2);
+  --scrollbar-track-hover-bg-color:;
+
+
+  --initial-opacity: 1;
+  --initial-scale: 1;
+  --initial-translateX: 0%;
+  --initial-translateY: 0%;
+  --animation-duration: 800ms;
+  --boxshadow-bg-color: 0 4px 23px 0 rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+:root.dark {
+  --body-color: #121212;  
+  --color-white: #ffffff;
+  --title-color: #fff;
+  --label-color: #fff;
+  --subtitle-color: #bfbfbf;
+  --card-bg-color: #1e1e1e;
+  --card-header-border-color: #3e3e42;
+  --border-color: #3e3e42;
+
+  --input-text-color: var(--subtitle-color);
+  --input-bg-color: var(--card-bg-color);
+  --input-border-color: var(--card-header-border-color);
+
+  --topsearchbar-header-bg-color: #2d2d30;  
+  --toptoolbar-header-bg-color: var(--button-bg-color);
+  --thumbnail-box-shadow: 0px 8px 16px 0px rgba(96, 96, 96, 0.90);
+
+  --tab-bg-color: #3e3e42;
+  --tab-hover-color: var(--card-bg-color);
+  --tab-hover-text-color: var(--title-color);
+  --tab-text-color: var(--subtitle-color); 
+
+  --button-bg-color: #3e3e42;
+  --button-bg-hover-color: var(--tab-hover-color);
+  --button-saving-bg-color: rgb(116, 127, 134);
+  --button-outline-bg-color: var(--card-bg-color);
+  --button-outline-hover-bg-color: var(--border-color);
+  --pagebuilder-section-bg: var(--button-bg-color);;
+
+  --text-inverse: #121212;
+
+  --action-primary: #FFFFFF;
+  --action-primary-hover: #E4E4E4;
+  --action-inverse-bg-color: #FFFFFF;
+  --action-inverse-text-color: var(--text-inverse);
+  --action-tertiary: #2A2A2A;
+  --action-tertiary-hover: #383838;
+  --action-accent: #636363;
+  --action-accent-hover: #D1D5DB;
+  --border-default: #3E3E3E;
+
+  /* px-btn design tokens */
+  --px-btn-height-sm: 32px;
+  --px-btn-height-md: 36px;
+  --px-btn-height-lg: 42px;
+  --px-btn-default-bg: var(--card-bg-color);
+  --px-btn-default-text: var(--subtitle-color);
+  --px-btn-default-border: var(--border-default);
+  --px-btn-default-hover-bg: var(--button-outline-hover-bg-color);
+  --px-btn-solid-bg: var(--action-primary);
+  --px-btn-solid-text: var(--text-inverse);
+  --px-btn-solid-border: transparent;
+  --px-btn-solid-hover-bg: var(--action-primary-hover);
+  --px-btn-muted-bg: var(--action-tertiary);
+  --px-btn-muted-text: var(--subtitle-color);
+  --px-btn-muted-border: transparent;
+  --px-btn-muted-hover-bg: var(--action-tertiary-hover);
+  --px-btn-muted-hover-text: var(--title-color);
+  --px-btn-link-text: var(--blue-text-color);
+  --px-btn-link-hover-text: var(--hover-blue-text-color);
+  --px-btn-ghost-text: var(--subtitle-color);
+  --px-btn-ghost-hover-bg: var(--action-tertiary);
+
+  --card-table-header-color: #252526;
+
+  --blue-text-color: #559dff;
+  --hover-blue-text-color: #2F87FE;
+  --sidebar-border-color: #3e3e42;
+  --sidebar-blue-text-color: var(--color-white);
+
+  --studio-toggle-focus-ring: rgba(255, 255, 255, 0.12);
+
+  /* Studio Checkbox / Radio — dark mode (Eyris) */
+  --studio-checkbox-border-color: #4B5563;
+  --studio-checkbox-check-fill: #000;
+  --studio-checkbox-checked-bg: var(--color-white);
+  --studio-radio-checked-fill: var(--color-white);
+  --studio-radio-checked-border: var(--color-white);
+  --studio-radio-checked-dot: var(--studio-checkbox-check-fill);
+  --studio-radio-checked-dot-size: 8px;
+
+  --help-link-color: var(--subtitle-color);
+  --help-link-hover-color: var(--subtitle-color);
+
+  --scrollbar-track-bg-color: var(--button-bg-color);
+  --scrollbar-track-scroll-bg-color: var(--tab-hover-color);
+  --scrollbar-track-hover-bg-color:;
+
+  --boxshadow-bg-color: 0 4px 23px 0 rgb(255 255 255 / 20%), 0 2px 6px rgb(255 255 255 / 20%);
+}
+
+
+@media screen and (max-width: 1024px){
+  :root{
+    --font-13: 12px;
+    --font-14: 13px;
+    --font-15: 14px;
+    --font-16: 15px;
+    --font-18: 16px;
+    --font-20: 18px;
+    --font-22: 20px;
+    --font-25: 21px;
+    --font-30: 22px;
+    --font-35: 27px;
+    --font-40: 30px;
+    --font-50: 35px;
+    --font-60: 45px;
+    --font-74: 55px;
+  }
+}
