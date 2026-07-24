@@ -3258,3 +3258,279 @@ body.cursor-ready .cursor-dot {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Pricing (gated rate guide) ===== */
+
+.pricing-gate {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2.25rem;
+  text-align: center;
+}
+
+.pricing-gate h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.pricing-gate > p {
+  font-size: 0.95rem;
+  margin-bottom: 1.6rem;
+}
+
+.pricing-gate .guide-form {
+  text-align: left;
+}
+
+.pricing-gate .guide-form input {
+  padding: 0.85rem 1.05rem;
+  font-size: 0.95rem;
+}
+
+.pricing-gate .btn {
+  width: 100%;
+  padding: 0.85rem 1.3rem;
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+.pricing-gate .guide-form-status {
+  font-size: 0.82rem;
+  color: var(--faint);
+  text-align: center;
+}
+
+.pricing-content {
+  margin-top: 0.5rem;
+}
+
+.pricing-nav {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pricing-nav a {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-full);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.pricing-nav a:hover {
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--lime);
+}
+
+.pricing-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-tier-card {
+  padding: 1.8rem 1.6rem;
+}
+
+.pricing-tier-card.is-full {
+  border-color: var(--lime);
+}
+
+.pricing-tier-card .tsym {
+  color: var(--lime);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.6rem;
+}
+
+.pricing-tier-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.pricing-tier-price {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--lime);
+  margin-bottom: 0.7rem;
+}
+
+.pricing-tier-price small {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.pricing-tier-card p.desc {
+  font-size: 0.87rem;
+}
+
+.pricing-note {
+  padding: 1.1rem 1.4rem;
+  font-size: 0.87rem;
+  color: var(--muted);
+  border-left: 3px solid var(--lime);
+  background: rgba(52, 211, 153, 0.05);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: 3rem;
+}
+
+.pricing-note strong {
+  color: var(--text);
+}
+
+.pricing-pillar {
+  margin-top: 3.5rem;
+}
+
+.pricing-pillar-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.pricing-pillar-num {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--faint);
+}
+
+.pricing-pillar h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-pillar-lede {
+  font-size: 0.95rem;
+  max-width: 620px;
+  margin-bottom: 1.5rem;
+}
+
+.rate-group {
+  padding: 0.2rem 0;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.rate-group-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 1rem 1.5rem 0.6rem;
+}
+
+table.rate-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.rate-table td {
+  padding: 0.85rem 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+table.rate-table tr:first-child td {
+  border-top: none;
+}
+
+table.rate-table td.svc {
+  color: var(--text);
+}
+
+table.rate-table td.pkg-name {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  width: 1%;
+}
+
+table.rate-table td.includes {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+table.rate-table td.num {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--lime);
+  font-size: 0.92rem;
+}
+
+.rate-pill {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.18rem 0.5rem;
+  border-radius: var(--radius-full);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.rate-pill.monthly {
+  background: rgba(52, 211, 153, 0.14);
+  color: var(--lime);
+}
+
+.pricing-terms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 3.5rem;
+}
+
+.pricing-terms-card {
+  padding: 1.6rem 1.7rem;
+}
+
+.pricing-terms-card h3 {
+  font-size: 1rem;
+  color: var(--lime);
+  margin-bottom: 0.7rem;
+}
+
+.pricing-terms-card ul {
+  padding-left: 1.1rem;
+  font-size: 0.87rem;
+  color: var(--muted);
+}
+
+.pricing-terms-card ul li {
+  padding: 0.2rem 0;
+  list-style: disc;
+}
+
+@media (max-width: 820px) {
+  .pricing-tiers,
+  .pricing-terms {
+    grid-template-columns: 1fr;
+  }
+
+  table.rate-table td {
+    padding: 0.75rem 1rem;
+  }
+
+  .rate-group-title {
+    padding: 0.9rem 1rem 0.5rem;
+  }
+}
